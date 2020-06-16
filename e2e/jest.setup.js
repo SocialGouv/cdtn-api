@@ -1,3 +1,5 @@
+import "@babel/polyfill";
+
 import axios from "axios";
 
 const PORT = process.env.PORT || 3000;
