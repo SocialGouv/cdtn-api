@@ -1,0 +1,56 @@
+{
+  "name": "@socialgouv/cdtn-api",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon --exec \"node -r esm ./src\"",
+    "docker:restart": "yarn docker:stop && docker-compose up --build -d api",
+    "docker:start": "docker-compose up -d api",
+    "docker:stop": "docker-compose down",
+    "start": "cross-env NODE_ENV=production node -r esm ./src",
+    "test": "yarn test:lint && yarn test:type && yarn test:unit --silent",
+    "test:e2e": "jest --testPathIgnorePatterns=\"<rootDir>/src/\"",
+    "test:lint": "eslint .",
+    "test:type": "tsc",
+    "test:unit": "jest --testPathIgnorePatterns=\"<rootDir>/e2e/\"",
+    "test:update": "jest --testPathIgnorePatterns=\"<rootDir>/e2e/\" --updateSnapshot",
+    "test:watch": "yarn test:unit --watch"
+  },
+  "dependencies": {
+    "@koa/cors": "3.1.0",
+    "@koa/router": "9.0.1",
+    "@socialgouv/kali-data": "https://github.com/SocialGouv/kali-data#master",
+    "cross-env": "7.0.2",
+    "fuse.js": "6.0.4",
+    "html-to-text": "5.1.1",
+    "koa": "2.12.1",
+    "node-cache": "5.1.1",
+    "npmlog": "4.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "7.10.2",
+    "@babel/plugin-transform-runtime": "7.10.1",
+    "@babel/preset-env": "7.10.2",
+    "@socialgouv/eslint-config-strict": "1.0.0-beta.4",
+    "@types/jest": "25.2.3",
+    "@types/koa": "2.11.3",
+    "@types/node": "14.0.11",
+    "axios": "0.19.2",
+    "babel-eslint": "10.1.0",
+    "eslint": "7.2.0",
+    "eslint-plugin-sort-requires": "2.1.0",
+    "esm": "3.2.25",
+    "husky": "4.2.5",
+    "jest": "26.0.1",
+    "nodemon": "2.0.4",
+    "prettier": "2.0.5",
+    "typescript": "3.9.3",
+    "waait": "1.0.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "yarn test"
+    }
+  }
+}
