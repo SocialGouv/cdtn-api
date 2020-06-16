@@ -12,5 +12,5 @@ variables:
   AUTO_DEVOPS_PROD_ENVIRONMENT_NAME: "prod2"
 
 Build:
-  rules:
-    - when: never
+  script:
+    - echo "hello, world"
