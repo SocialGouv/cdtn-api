@@ -20,7 +20,7 @@
   "dependencies": {
     "@koa/cors": "3.1.0",
     "@koa/router": "9.0.1",
-    "@socialgouv/kali-data": "1.64.0",
+    "@socialgouv/kali-data": "1.65.0",
     "cross-env": "7.0.2",
     "esm": "3.2.25",
     "fuse.js": "6.0.4",
