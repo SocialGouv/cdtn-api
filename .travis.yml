@@ -16,6 +16,18 @@ jobs:
       after_success:
         - npx codecov
 
+    - stage: Test
+      name: E2E Tests
+      env:
+        - NODE_ENV=production
+      services:
+        - docker
+      before_script:
+        # Build and start "api" container:
+        - yarn docker:start
+      script:
+        - yarn test:e2e
+
 # Limit branches builds to "master" one:
 branches:
   only:
