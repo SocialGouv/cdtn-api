@@ -1,4 +1,4 @@
-import pack from "../../../../package.json";
+import pack from "../../package.json";
 import documentation from "../documentation/index.json";
 
 documentation.info.version = pack.version;
