@@ -21,6 +21,7 @@
 Raw agreement [unist][link-unist] tree (with parent sections attached to each article).
 
 **Path:**
+
 - `agreementIdOrIdcc`: `string` Agreement ID or IDCC. **Required**.
 
 ### [GET] `/agreements`
