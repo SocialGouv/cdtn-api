@@ -17,9 +17,9 @@ const env: AppComponentEnvironment = {
   },
 
   labels: {
-    component: "next",
+    component: "cdtn-api",
   },
-  name: "www",
+  name: "api",
 
   servicePort: 80,
 };
