@@ -11,7 +11,7 @@ router.get("/", IndexController.get);
 router.get("/healthz", HealthController.get);
 router.get("/agreement/:idOrIdcc", AgreementController.get);
 router.get("/agreements", AgreementController.index);
-router.get("/article/:id", ArticleController.get);
+router.get("/article/:idOrcid", ArticleController.get);
 router.get("/articles", ArticleController.index);
 
 export default router;

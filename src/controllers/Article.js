@@ -15,9 +15,9 @@ class Article {
    */
   get(ctx) {
     try {
-      const { id } = ctx.params;
+      const { idOrcid } = ctx.params;
 
-      const body = getArticleWithParentSections(id);
+      const body = getArticleWithParentSections(idOrcid);
 
       ctx.body = body;
     } catch (err) {
