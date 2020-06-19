@@ -1,26 +1,26 @@
-import Article from "../Article";
+import CodeArticle from "../CodeArticle";
 
-describe(`controllers/Article`, () => {
+describe(`controllers/CodeArticle`, () => {
   const koaContextMock = {
     throw: jest.fn(),
   };
 
   describe(`#get()`, () => {
     describe(`should fill body with the expected data`, () => {
-      it(`with an article CID`, () => {
+      it(`with a code article CID`, () => {
         const ctx = {
           ...koaContextMock,
           params: {
-            idOrcid: "KALIARTI000005781804",
+            idOrcid: "LEGIARTI000006901112",
           },
         };
 
-        Article.get(ctx);
+        CodeArticle.get(ctx);
 
         expect(ctx.throw).not.toHaveBeenCalled();
         expect(ctx.body).toMatchObject({
           data: {
-            cid: "KALIARTI000005781804",
+            cid: "LEGIARTI000006901112",
             id: expect.any(String),
           },
         });
@@ -30,34 +30,24 @@ describe(`controllers/Article`, () => {
 
   describe(`#index()`, () => {
     describe(`should fill body with the expected data`, () => {
-      it(`with an agreement ID`, () => {
+      it(`with a code ID`, () => {
         const ctx = {
           ...koaContextMock,
           query: {
-            agreementIdOrIdcc: "KALICONT000005635091",
-            query: "1.2",
+            codeId: "LEGITEXT000006072050",
+            query: "L1234",
           },
         };
 
-        Article.index(ctx);
+        CodeArticle.index(ctx);
 
         expect(ctx.throw).not.toHaveBeenCalled();
         expect(ctx.body.length).toBeGreaterThanOrEqual(1);
-      });
-
-      it(`with an agreement IDCC`, () => {
-        const ctx = {
-          ...koaContextMock,
-          query: {
-            agreementIdOrIdcc: "2190",
-            query: "1.2",
-          },
-        };
-
-        Article.index(ctx);
-
-        expect(ctx.throw).not.toHaveBeenCalled();
-        expect(ctx.body.length).toBeGreaterThanOrEqual(1);
+        expect(ctx.body[0]).toMatchObject({
+          cid: "LEGIARTI000006901112",
+          id: expect.any(String),
+          num: "L1234-1",
+        });
       });
     });
   });

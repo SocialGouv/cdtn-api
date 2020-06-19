@@ -2,7 +2,12 @@ import "@socialgouv/kali-data";
 
 export as namespace Api;
 
-type EnrichedArticle = KaliData.AgreementArticleData & {
+type EnrichedAgreementArticle = KaliData.AgreementArticleData & {
+  /** Sections path. */
+  path: string;
+};
+
+type EnrichedCodeArticle = LegiData.AgreementArticleData & {
   /** Sections path. */
   path: string;
 };

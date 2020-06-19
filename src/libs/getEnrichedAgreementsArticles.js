@@ -1,12 +1,11 @@
 // @ts-check
 
-import { getAgreement, getAgreementArticlesWithParentSections } from "@socialgouv/kali-data";
+import { getAgreementArticlesWithParentSections } from "@socialgouv/kali-data";
 
 import cache from "../helpers/cache";
 import convertHtmlToPlainText from "../helpers/convertHtmlToPlainText";
 import ApiError from "./ApiError";
-
-const CACHE_TTL = 24 * 60 * 60; // => 24h
+import getAgreementByIdOrIdcc from "./getAgreementByIdOrIdcc";
 
 /**
  * @param {KaliData.AgreementArticleWithParentSections["sections"]} sections
@@ -32,31 +31,33 @@ function generatePath(sections, num) {
 /**
  * @param {string} agreementIdOrIdcc
  *
- * @returns {Api.EnrichedArticle[]}
+ * @returns {Api.EnrichedAgreementArticle[]}
  */
 export default function getEnrichedAgreementsArticles(agreementIdOrIdcc) {
   try {
-    const agreement = getAgreement(agreementIdOrIdcc);
-    const cacheKey = agreement.data.id;
+    // Use internal lib to take advantage of cache:
+    const agreement = getAgreementByIdOrIdcc(agreementIdOrIdcc);
+    const agreementId = agreement.data.id;
+    const cacheKey = `agreementArticles-${agreementId}`;
 
     // Return cached enriched articles if available for this agreement:
-    const maybeCachedEnrichedArticles = cache.get(cacheKey);
-    if (maybeCachedEnrichedArticles !== undefined) {
-      return maybeCachedEnrichedArticles;
+    const maybeCachedEnrichedAgreementArticles = cache.get(cacheKey);
+    if (maybeCachedEnrichedAgreementArticles !== undefined) {
+      return maybeCachedEnrichedAgreementArticles;
     }
 
-    const articlesWithParentSections = getAgreementArticlesWithParentSections(agreementIdOrIdcc);
+    const articlesWithParentSections = getAgreementArticlesWithParentSections(agreementId);
 
-    /** @type {Api.EnrichedArticle[]} */
-    const enrichedArticles = articlesWithParentSections.map(({ data, sections }) => ({
+    /** @type {Api.EnrichedAgreementArticle[]} */
+    const EnrichedAgreementArticles = articlesWithParentSections.map(({ data, sections }) => ({
       ...data,
       content: convertHtmlToPlainText(data.content),
       path: generatePath(sections, data.num),
     }));
 
-    cache.set(cacheKey, enrichedArticles, CACHE_TTL);
+    cache.set(cacheKey, EnrichedAgreementArticles);
 
-    return enrichedArticles;
+    return EnrichedAgreementArticles;
   } catch (err) {
     throw new ApiError(err.message, 500, "libs/getEnrichedAgreementsArticles()");
   }

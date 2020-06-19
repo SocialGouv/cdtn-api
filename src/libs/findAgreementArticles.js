@@ -11,16 +11,16 @@ import getEnrichedAgreementsArticles from "./getEnrichedAgreementsArticles";
  * @param {string} agreementIdOrIdcc
  * @param {string} query
  *
- * @returns {Api.EnrichedArticle[]}
+ * @returns {Api.EnrichedAgreementArticle[]}
  *
  * TODO Extract query cleaning into a separate helper.
  */
-export default function findArticles(agreementIdOrIdcc, query) {
+export default function findAgreementArticles(agreementIdOrIdcc, query) {
   const articles = getEnrichedAgreementsArticles(agreementIdOrIdcc);
   const cleanedQuery = cleanQuery(query);
   const smartQuery = smartenArticleQuery(cleanedQuery);
 
-  /** @type {Fuse.default.IFuseOptions<Api.EnrichedArticle>} */
+  /** @type {Fuse.default.IFuseOptions<Api.EnrichedAgreementArticle>} */
   const fuseJsOptions = {
     distance: 999,
     findAllMatches: false,
@@ -36,7 +36,7 @@ export default function findArticles(agreementIdOrIdcc, query) {
 
   const fuseJs = new FuseJs(articles, fuseJsOptions);
   const foundArticles =
-    /** @type {Fuse.default.FuseResult<Api.EnrichedArticle>[]} */
+    /** @type {Fuse.default.FuseResult<Api.EnrichedAgreementArticle>[]} */
     (fuseJs.search(smartQuery)).slice(0, 10).map(({ item }) => item);
 
   return foundArticles;
