@@ -1,3 +1,10 @@
+## [1.2.8](https://github.com/SocialGouv/cdtn-api/compare/v1.2.7...v1.2.8) (2020-06-22)
+
+
+### Bug Fixes
+
+* **autodevops:** ensure that the auto ship to production works (5) ([742cbcf](https://github.com/SocialGouv/cdtn-api/commit/742cbcff65fbdf3e6b9dcb1e0b5c9b767c6232b8))
+
 ## [1.2.7](https://github.com/SocialGouv/cdtn-api/compare/v1.2.6...v1.2.7) (2020-06-22)
 
 
