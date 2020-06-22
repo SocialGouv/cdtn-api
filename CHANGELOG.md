@@ -1,3 +1,10 @@
+## [1.2.9](https://github.com/SocialGouv/cdtn-api/compare/v1.2.8...v1.2.9) (2020-06-22)
+
+
+### Bug Fixes
+
+* **gitlab:** update socialgouv/gitlab-ci-yml to v17.0.0-beta.29 ([89f4fd2](https://github.com/SocialGouv/cdtn-api/commit/89f4fd257c89297ef68885731dc457d2507c8cf6))
+
 ## [1.2.8](https://github.com/SocialGouv/cdtn-api/compare/v1.2.7...v1.2.8) (2020-06-22)
 
 
