@@ -23,7 +23,7 @@ jobs:
       addons:
         apt:
           packages:
-            - docker
+            - docker-ce
       services:
         - docker
       install:
