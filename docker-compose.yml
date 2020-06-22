@@ -5,5 +5,6 @@ services:
     restart: always
     build:
       context: .
+      shm_size: 1G
     ports:
       - 3000:3000
