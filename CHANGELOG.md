@@ -1,3 +1,10 @@
+## [1.2.10](https://github.com/SocialGouv/cdtn-api/compare/v1.2.9...v1.2.10) (2020-06-22)
+
+
+### Performance Improvements
+
+* **docker:** separate install and file cp ([#11](https://github.com/SocialGouv/cdtn-api/issues/11)) ([64f5221](https://github.com/SocialGouv/cdtn-api/commit/64f5221968ecd936132d9bef365bc216c9815551))
+
 ## [1.2.9](https://github.com/SocialGouv/cdtn-api/compare/v1.2.8...v1.2.9) (2020-06-22)
 
 
