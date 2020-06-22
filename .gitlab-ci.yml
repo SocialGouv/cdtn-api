@@ -15,7 +15,7 @@ Register image:
   extends: .autodevops_register_image
   variables:
     DOCKER_BUILD_ARGS: >-
-      --shm-size 1G
+      --shm-size 1g
 
 Trigger Production:
   extends: .autodevops_trigger_production
