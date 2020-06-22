@@ -20,6 +20,10 @@ jobs:
       name: E2E Tests
       env:
         - NODE_ENV=production
+      addons:
+        apt:
+          packages:
+            - docker
       services:
         - docker
       install:
