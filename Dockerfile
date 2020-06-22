@@ -5,9 +5,11 @@ ENV PORT=$PORT
 
 WORKDIR /app
 
-COPY . .
+COPY package.json yarn.lock /app/
 
-RUN yarn --production --pure-lockfile
+RUN yarn --frozen-lockfile --cache-folder /dev/shm/yarn
+
+COPY src /app/src
 
 USER node
 

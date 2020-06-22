@@ -1,9 +1,10 @@
-version: "3"
+version: "3.8"
 
 services:
   api:
     restart: always
     build:
       context: .
+      shm_size: 1G
     ports:
       - 3000:3000
