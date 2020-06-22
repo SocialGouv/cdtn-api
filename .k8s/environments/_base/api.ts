@@ -20,6 +20,16 @@ const env: AppComponentEnvironment = {
     component: "cdtn-api",
   },
   name: "api",
+  
+  requests: {
+    cpu: "100m",
+    memory: "128Mi",
+  },
+  
+  limits: {
+    cpu: "1000m",
+    memory: "256Mi",
+  },
 
   servicePort: 80,
 };
