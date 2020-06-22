@@ -11,6 +11,12 @@ Build:
   script:
     - echo "look ma, no build"
 
+Register image:
+  extends: .autodevops_register_image
+  variables:
+    DOCKER_BUILD_ARGS: >-
+      --shm-size 1G
+
 Trigger Production:
   extends: .autodevops_trigger_production
   rules:
