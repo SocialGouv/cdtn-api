@@ -116,9 +116,9 @@
     fastq "^1.6.0"
 
 "@socialgouv/kosko-charts@^2.0.0-beta.4":
-  version "2.0.0-beta.7"
-  resolved "https://registry.yarnpkg.com/@socialgouv/kosko-charts/-/kosko-charts-2.0.0-beta.7.tgz#41d6dfcedab5ade4d17aef61d5bf9f914f5ca902"
-  integrity sha512-ajN+RJVbn7K0V4tzjIOgype8xJ/VNsezuk9/2JQ9Ua/gd7d3F6wSp9iW/HTICu9JAZII36+uPI3Vvrrir/c0aQ==
+  version "2.0.0-beta.10"
+  resolved "https://registry.yarnpkg.com/@socialgouv/kosko-charts/-/kosko-charts-2.0.0-beta.10.tgz#21180cb6534d797d64588ff0e8e3dfa14fb375d4"
+  integrity sha512-hP3CGd0KCAwpVzjtbGPCa/C3JFeWCVkjdiRLxgW/EJWXDgkpeBOQoKpzXfW2AoUYi2t1c+slGukOqlxO5G/0SQ==
   dependencies:
     fp-ts "^2.6.0"
     io-ts "^2.2.2"
@@ -129,9 +129,9 @@
   integrity sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
 
 "@types/node@^13.13.4":
-  version "13.13.11"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.13.11.tgz#f8d2acb51f793bd5f4b07d9926bb5ce1dfb7a23e"
-  integrity sha512-FX7mIFKfnGCfq10DGWNhfCNxhACEeqH5uulT6wRRA1KEt7zgLe0HdrAd9/QQkObDqp2Z0KEV3OAmNgs0lTx5tQ==
+  version "13.13.12"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.13.12.tgz#9c72e865380a7dc99999ea0ef20fc9635b503d20"
+  integrity sha512-zWz/8NEPxoXNT9YyF2osqyA9WjssZukYpgI4UYZpOjcyqwIUqWGkcCionaEb9Ki+FULyPyvNFpg/329Kd2/pbw==
 
 ajv@^6.10.2:
   version "6.12.2"
@@ -344,9 +344,9 @@ fast-deep-equal@^3.1.1:
   integrity sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==
 
 fast-glob@^3.2.2:
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.2.tgz#ade1a9d91148965d4bf7c51f72e1ca662d32e63d"
-  integrity sha512-UDV82o4uQyljznxwMxyVRJgZZt3O5wENYojjzbaGEGZgeOxkLFf+V4cnUD+krzb2F72E18RhamkMZ7AdeggF7A==
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.4.tgz#d20aefbf99579383e7f3cc66529158c9b98554d3"
+  integrity sha512-kr/Oo6PX51265qeuCYsyGypiO5uJFgBS0jksyG7FUeCyQzNwYnzrNIMR1NXfkZXsMYXYLRAHgISHBz8gQcxKHQ==
   dependencies:
     "@nodelib/fs.stat" "^2.0.2"
     "@nodelib/fs.walk" "^1.2.3"
@@ -402,9 +402,9 @@ find-up@^4.0.0, find-up@^4.1.0:
     path-exists "^4.0.0"
 
 fp-ts@^2.6.0:
-  version "2.6.4"
-  resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-2.6.4.tgz#8b3415e596ab9b03c680c87941bd834cf114b30a"
-  integrity sha512-EATHwpcln67HgJj/nWbcNDhLcIENC4lImzw9DXNyOxX6S/+k+dJERHd7PGimO1PKTChqu+CQSMqkP+kgsRqyxQ==
+  version "2.6.6"
+  resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-2.6.6.tgz#cfb57772a845628e56da05d8c5dc03227aedadb4"
+  integrity sha512-zYfhPNb2fwpkrJ5RpgEMsrvMv8r9x+guJptnaEBF295YtoVr3+jbGDXZqSqPcfEWas5Trj3FpbDkzmXbx0YYzQ==
 
 get-caller-file@^2.0.1:
   version "2.0.5"
@@ -447,9 +447,9 @@ import-local@^3.0.2:
     resolve-cwd "^3.0.0"
 
 io-ts@^2.2.2:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/io-ts/-/io-ts-2.2.4.tgz#c9b5390b8c60b9976ad03f670a6b976fe50d4083"
-  integrity sha512-a8A/3jekTgSPfQ+OG40sTiX2gohXZz89X1+TfKsWJ/vpA2dBilBkrGYPiDE8OaKMMG7xm5ma3SAZL5eNr4Bi2w==
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/io-ts/-/io-ts-2.2.6.tgz#809305ef9af646c4edf79145671298835e321758"
+  integrity sha512-UcO9I/ptnGttBKRAF3KW0G6fiS7uqfjUSDdeq+qmMKH0k8sZrbDMnNP8I/TTSkoztPr5OZstnQxb1Vo5Ua8MOg==
 
 is-arrayish@^0.2.1:
   version "0.2.1"
