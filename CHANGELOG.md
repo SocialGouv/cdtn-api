@@ -1,3 +1,11 @@
+## [1.2.7](https://github.com/SocialGouv/cdtn-api/compare/v1.2.6...v1.2.7) (2020-06-22)
+
+
+### Bug Fixes
+
+* **autodevops:** ensure that the auto ship to production works (4) ([6319ab3](https://github.com/SocialGouv/cdtn-api/commit/6319ab34a5889a8aa7977a60edf97e01f844acdb))
+* **release:** add missing npm plugin ([3a49480](https://github.com/SocialGouv/cdtn-api/commit/3a49480bc20dee37ddffb42d57319d5478a32a68))
+
 ## [1.2.6](https://github.com/SocialGouv/cdtn-api/compare/v1.2.5...v1.2.6) (2020-06-22)
 
 
