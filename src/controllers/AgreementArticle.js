@@ -4,14 +4,14 @@ import { getArticleWithParentSections } from "@socialgouv/kali-data";
 
 import answerWithError from "../helpers/answerWithError";
 import ApiError from "../libs/ApiError";
-import findArticles from "../libs/findArticles";
+import findAgreementArticles from "../libs/findAgreementArticles";
 
-class Article {
+class AgreementArticle {
   /**
    * @param {import("koa").Context} ctx
    *
    * @example
-   * - http://localhost:3000/article/KALIARTI000030641746
+   * - http://localhost:3000/agreement/article/KALIARTI000030641746
    */
   get(ctx) {
     try {
@@ -21,18 +21,18 @@ class Article {
 
       ctx.body = body;
     } catch (err) {
-      answerWithError("controllers/Article#get()", err, ctx);
+      answerWithError("controllers/AgreementArticle#get()", err, ctx);
     }
   }
 
   /**
-   * Find an article given a query string within the specified agreement idcc.
+   * Find an agreement article given a query string within the specified agreement idcc.
    *
    * @param {import("koa").Context} ctx
    *
    * @example
-   * - http://localhost:3000/articles?agreementIdOrIdcc=2190&query=1.2
-   * - http://localhost:3000/articles?agreementIdOrIdcc=KALICONT000005635091&query=1.2
+   * - http://localhost:3000/agreement/articles?agreementIdOrIdcc=2190&query=1.2
+   * - http://localhost:3000/agreement/articles?agreementIdOrIdcc=KALICONT000005635091&query=1.2
    */
   index(ctx) {
     try {
@@ -52,13 +52,13 @@ class Article {
           throw new ApiError("The `query` query parameter must be a {string}.", 422);
       }
 
-      const body = findArticles(agreementIdOrIdcc, query);
+      const body = findAgreementArticles(agreementIdOrIdcc, query);
 
       ctx.body = body;
     } catch (err) {
-      answerWithError("controllers/Article#index()", err, ctx);
+      answerWithError("controllers/AgreementArticle#index()", err, ctx);
     }
   }
 }
 
-export default new Article();
+export default new AgreementArticle();

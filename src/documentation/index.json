@@ -1,27 +1,20 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "KALI Labor Agreements Database API.",
-    "title": "KALI Data API",
-    "contact": {
-      "email": "dsi-incubateur@sg.social.gouv.fr"
-    },
+    "title": "DILA Data API",
+    "version": "0.0.0",
+    "description": "DILA Legal references API.",
     "license": {
       "name": "Apache 2.0",
       "url": "https://github.com/SocialGouv/kali-data/blob/master/LICENSE"
-    }
+    },
+    "contact": { "email": "dsi-incubateur@sg.social.gouv.fr" }
   },
-  "host": "kali.codedutravail.fabrique.social.gouv.fr",
+  "host": "cdtn-api.prod2.fabrique.social.gouv.fr",
   "basePath": "/",
   "tags": [
-    {
-      "name": "agreement",
-      "description": "Labor Agreement"
-    },
-    {
-      "name": "article",
-      "description": "Labor Agreement Article"
-    }
+    { "name": "agreement", "description": "Labor Agreement" },
+    { "name": "code", "description": "Code of Law" }
   ],
   "schemes": ["https"],
   "paths": {
@@ -30,9 +23,7 @@
         "tags": ["agreement"],
         "summary": "",
         "description": "",
-        "operationId": "getAgreementById",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "operationId": "getAgreementByIdOrIdcc",
         "parameters": [
           {
             "in": "path",
@@ -45,12 +36,7 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "object"
-              }
-            }
+            "schema": { "type": "array", "items": { "type": "object" } }
           }
         }
       }
@@ -61,8 +47,6 @@
         "summary": "",
         "description": "",
         "operationId": "findAgreementsByQuery",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
         "parameters": [
           {
             "in": "query",
@@ -75,29 +59,54 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "object"
-              }
-            }
+            "schema": { "type": "array", "items": { "type": "object" } }
           }
         }
       }
     },
-    "/article/{id}": {
+    "/agreement/article/{idOrCid}": {
       "get": {
-        "tags": ["article"],
+        "tags": ["agreement"],
         "summary": "",
         "description": "",
-        "operationId": "getArticleByIdOrIdcc",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "operationId": "getAgreementArticleByIdOrIdcc",
         "parameters": [
           {
             "in": "path",
-            "name": "idOrcid",
-            "description": "Article ID or IDCC.",
+            "name": "idOrCid",
+            "description": "Agreement article ID or CID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "OK", "schema": { "type": "object" } } }
+      }
+    },
+    "/agreement/articles": {
+      "get": {
+        "tags": ["agreement"],
+        "summary": "",
+        "description": "",
+        "operationId": "findAgreementArticlesByAgreementIdOrIdccAndQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "agreementIdOrIdcc",
+            "description": "Agreement ID or IDCC.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "codeId",
+            "description": "Code ID.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "query",
+            "description": "Search query.",
             "required": true,
             "type": "string"
           }
@@ -105,26 +114,81 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "type": "object"
-            }
+            "schema": { "type": "array", "items": { "type": "object" } }
           }
         }
       }
     },
-    "/articles": {
+    "/code/{id}": {
       "get": {
-        "tags": ["article"],
+        "tags": ["code"],
         "summary": "",
         "description": "",
-        "operationId": "findArticlesByAgreementIdOrIdccAndQuery",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "operationId": "getCodeByIdOrIdcc",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Code ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "OK", "schema": { "type": "object" } } }
+      }
+    },
+    "/codes": {
+      "get": {
+        "tags": ["code"],
+        "summary": "",
+        "description": "",
+        "operationId": "findCodesByQuery",
         "parameters": [
           {
             "in": "query",
-            "name": "agreementIdOrIdcc",
-            "description": "Agreement ID or IDCC.",
+            "name": "query",
+            "description": "Search query.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "type": "array", "items": { "type": "object" } }
+          }
+        }
+      }
+    },
+    "/code/article/{idOrCid}": {
+      "get": {
+        "tags": ["code"],
+        "summary": "",
+        "description": "",
+        "operationId": "getCodeArticleByIdOrIdcc",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "idOrCid",
+            "description": "Code article ID or CID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "OK", "schema": { "type": "object" } } }
+      }
+    },
+    "/code/articles": {
+      "get": {
+        "tags": ["code"],
+        "summary": "",
+        "description": "",
+        "operationId": "findCodeArticlesByCodeIdAndQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "codeId",
+            "description": "Code ID.",
             "required": true,
             "type": "string"
           },
@@ -139,12 +203,7 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "object"
-              }
-            }
+            "schema": { "type": "array", "items": { "type": "object" } }
           }
         }
       }

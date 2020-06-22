@@ -9,10 +9,11 @@
     "docker:start": "docker-compose up -d api",
     "docker:stop": "docker-compose down",
     "start": "cross-env NODE_ENV=production node -r esm ./src",
-    "test": "yarn test:lint && yarn test:type && yarn test:unit --silent",
+    "test": "yarn test:lint && yarn test:type && yarn test:unit --silent && yarn test:swag",
     "test:e2e": "jest --testPathIgnorePatterns=\"<rootDir>/src/\"",
     "lint": "eslint .",
     "test:lint": "yarn lint",
+    "test:swag": "swagger-cli validate ./src/documentation/index.json",
     "test:type": "tsc",
     "test:unit": "jest --testPathIgnorePatterns=\"<rootDir>/e2e/\"",
     "test:update": "jest --testPathIgnorePatterns=\"<rootDir>/e2e/\" --updateSnapshot",
@@ -22,13 +23,15 @@
     "@koa/cors": "3.1.0",
     "@koa/router": "9.0.1",
     "@socialgouv/kali-data": "1.73.0",
+    "@socialgouv/legi-data": "1.18.0",
     "cross-env": "7.0.2",
     "esm": "3.2.25",
     "fuse.js": "6.0.4",
     "html-to-text": "5.1.1",
     "koa": "2.12.1",
     "node-cache": "5.1.1",
-    "npmlog": "4.1.2"
+    "npmlog": "4.1.2",
+    "unist-util-flat-filter": "1.0.0"
   },
   "devDependencies": {
     "@babel/core": "7.10.2",
@@ -48,6 +51,7 @@
     "jest": "26.0.1",
     "nodemon": "2.0.4",
     "prettier": "2.0.5",
+    "swagger-cli": "4.0.3",
     "typescript": "3.9.3",
     "waait": "1.0.5"
   },
