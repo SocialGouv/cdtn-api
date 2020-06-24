@@ -5,7 +5,7 @@ import { getAgreement } from "@socialgouv/kali-data";
 import cache from "../helpers/cache";
 
 /**
- * Get cached agreement.
+ * Get an agreement.
  *
  * @param {number | string} idOrIdcc
  *

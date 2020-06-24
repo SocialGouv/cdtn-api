@@ -1,23 +1,22 @@
 // @ts-check
 
-import { getArticleWithParentSections } from "@socialgouv/legi-data";
-
 import answerWithError from "../helpers/answerWithError";
 import ApiError from "../libs/ApiError";
 import findCodeArticles from "../libs/findCodeArticles";
+import getCodeArticleByIdOrCid from "../libs/getCodeArticleByIdOrCid";
 
 class CodeArticle {
   /**
    * @param {import("koa").Context} ctx
    *
    * @example
-   * - http://localhost:3000/article/LEGIARTI000006901112
+   * - http://localhost:3000/code/article/LEGIARTI000006901112
    */
   get(ctx) {
     try {
-      const { idOrcid } = ctx.params;
+      const { idOrCid } = ctx.params;
 
-      const body = getArticleWithParentSections(idOrcid);
+      const body = getCodeArticleByIdOrCid(idOrCid);
 
       ctx.body = body;
     } catch (err) {

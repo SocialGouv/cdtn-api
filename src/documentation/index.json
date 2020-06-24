@@ -17,6 +17,18 @@
     { "name": "code", "description": "Code of Law" }
   ],
   "schemes": ["https"],
+  "definitions": {
+    "Article": {
+      "properties": {
+        "cid": { "type": "string" },
+        "containerId": { "type": "string" },
+        "content": { "type": "string" },
+        "id": { "type": "string" },
+        "index": { "type": "string" },
+        "path": { "type": "string" }
+      }
+    }
+  },
   "paths": {
     "/agreement/{idOrIdcc}": {
       "get": {
@@ -79,7 +91,14 @@
             "type": "string"
           }
         ],
-        "responses": { "200": { "description": "OK", "schema": { "type": "object" } } }
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Article"
+            }
+          }
+        }
       }
     },
     "/agreement/articles": {
@@ -114,7 +133,12 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "type": "array", "items": { "type": "object" } }
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Article"
+              }
+            }
           }
         }
       }
@@ -175,7 +199,14 @@
             "type": "string"
           }
         ],
-        "responses": { "200": { "description": "OK", "schema": { "type": "object" } } }
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Article"
+            }
+          }
+        }
       }
     },
     "/code/articles": {
@@ -203,7 +234,12 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "type": "array", "items": { "type": "object" } }
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Article"
+              }
+            }
           }
         }
       }

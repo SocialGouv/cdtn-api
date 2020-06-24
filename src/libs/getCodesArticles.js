@@ -7,9 +7,35 @@ import ApiError from "./ApiError";
 import getCodeById from "./getCodeById";
 
 /**
+ *
+ * @param {string} codeId
+ * @param {LegiData.CodeArticle} codeArticle
+ *
+ * @returns {Api.Article}
+ */
+function convertCodeArticleToArticle(codeId, codeArticle) {
+  const {
+    data: { cid, id, num, texte },
+  } = codeArticle;
+  const containerId = codeId;
+  const content = texte;
+  const index = num !== undefined ? num : "";
+  const path = "";
+
+  return {
+    cid,
+    containerId,
+    content,
+    id,
+    index,
+    path,
+  };
+}
+
+/**
  * @param {string} codeId
  *
- * @returns {LegiData.CodeArticleData[]}
+ * @returns {Api.Article[]}
  */
 export default function getCodesArticles(codeId) {
   try {
@@ -26,11 +52,12 @@ export default function getCodesArticles(codeId) {
     const codeArticles =
       /** @type {{ children: LegiData.CodeArticle[], type: "root" }} */
       (/** @type {*} */ (unistUtilFlatFilter(codeWithParentSections, { type: "article" })));
-    const codeArticlesData = codeArticles.children.map(({ data }) => data);
+    const articles = codeArticles.children.map(codeArticle =>
+      convertCodeArticleToArticle(codeId, codeArticle),
+    );
+    cache.set(cacheKey, articles);
 
-    cache.set(cacheKey, codeArticles);
-
-    return codeArticlesData;
+    return articles;
   } catch (err) {
     throw new ApiError(err.message, 500, "libs/getEnrichedAgreementsArticles()");
   }

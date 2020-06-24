@@ -5,7 +5,7 @@ import { getCodeWithParents } from "@socialgouv/legi-data";
 import cache from "../helpers/cache";
 
 /**
- * Get cached code.
+ * Get a code.
  *
  * @param {string} id
  *

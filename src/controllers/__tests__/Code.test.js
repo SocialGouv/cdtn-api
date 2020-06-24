@@ -2,9 +2,14 @@ import Code from "../Code";
 
 describe(`controllers/Code`, () => {
   const koaContextMock = {
+    params: {},
     query: {},
     throw: jest.fn(),
   };
+
+  beforeEach(() => {
+    koaContextMock.throw.mockReset();
+  });
 
   describe(`#get()`, () => {
     describe(`should fill body with the expected data`, () => {
@@ -56,6 +61,21 @@ describe(`controllers/Code`, () => {
         expect(ctx.body[0]).toMatchObject({
           id: "LEGITEXT000006073189",
         });
+      });
+    });
+
+    describe(`should throw`, () => {
+      it(`with a non-string <query> query`, () => {
+        const ctx = {
+          ...koaContextMock,
+          query: {
+            query: 123,
+          },
+        };
+
+        Code.index(ctx);
+
+        expect(ctx.throw).toHaveBeenCalledTimes(1);
       });
     });
   });

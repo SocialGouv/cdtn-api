@@ -1,10 +1,9 @@
 // @ts-check
 
-import { getArticleWithParentSections } from "@socialgouv/kali-data";
-
 import answerWithError from "../helpers/answerWithError";
 import ApiError from "../libs/ApiError";
 import findAgreementArticles from "../libs/findAgreementArticles";
+import getAgreementArticleByIdOrCid from "../libs/getAgreementArticleByIdOrCid";
 
 class AgreementArticle {
   /**
@@ -15,9 +14,9 @@ class AgreementArticle {
    */
   get(ctx) {
     try {
-      const { idOrcid } = ctx.params;
+      const { idOrCid } = ctx.params;
 
-      const body = getArticleWithParentSections(idOrcid);
+      const body = getAgreementArticleByIdOrCid(idOrCid);
 
       ctx.body = body;
     } catch (err) {
