@@ -11,13 +11,13 @@ const router = new KoaRouter();
 
 router.get("/", IndexController.get);
 
-router.get("/agreement/article/:idOrcid", AgreementArticleController.get);
+router.get("/agreement/article/:idOrCid", AgreementArticleController.get);
 router.get("/agreement/articles", AgreementArticleController.index);
 
 router.get("/agreement/:idOrIdcc", AgreementController.get);
 router.get("/agreements", AgreementController.index);
 
-router.get("/code/article/:idOrcid", CodeArticleController.get);
+router.get("/code/article/:idOrCid", CodeArticleController.get);
 router.get("/code/articles", CodeArticleController.index);
 
 router.get("/code/:id", CodeController.get);

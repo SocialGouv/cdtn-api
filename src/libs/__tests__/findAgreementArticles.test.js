@@ -5,8 +5,14 @@ describe("libs/findAgreementArticles()", () => {
     it(`with <agreementIdOrIdcc>="KALICONT000005635091", <query>="5.14"`, () => {
       const received = findAgreementArticles("KALICONT000005635091", "5.14");
 
-      expect(received[0].cid).toBe("KALIARTI000005782386");
-      expect(received[0].num).toBe("5.14");
+      expect(received[0]).toMatchObject({
+        cid: "KALIARTI000005782386",
+        containerId: "KALICONT000005635091",
+        content: expect.any(String),
+        id: expect.any(String),
+        index: "5.14",
+        path: expect.any(String),
+      });
     });
   });
 });

@@ -2,9 +2,14 @@ import Agreement from "../Agreement";
 
 describe(`controllers/Agreement`, () => {
   const koaContextMock = {
+    params: {},
     query: {},
     throw: jest.fn(),
   };
+
+  beforeEach(() => {
+    koaContextMock.throw.mockReset();
+  });
 
   describe(`#get()`, () => {
     describe(`should fill body with the expected data`, () => {
@@ -77,6 +82,21 @@ describe(`controllers/Agreement`, () => {
           id: "KALICONT000005635444",
           num: 1480,
         });
+      });
+    });
+
+    describe(`should throw`, () => {
+      it(`with a non-string <query> query`, () => {
+        const ctx = {
+          ...koaContextMock,
+          query: {
+            query: 123,
+          },
+        };
+
+        Agreement.index(ctx);
+
+        expect(ctx.throw).toHaveBeenCalledTimes(1);
       });
     });
   });

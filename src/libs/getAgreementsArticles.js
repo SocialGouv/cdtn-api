@@ -13,7 +13,7 @@ import getAgreementByIdOrIdcc from "./getAgreementByIdOrIdcc";
  *
  * @returns {string}
  */
-function generatePath(sections, num) {
+function generatePathFromSections(sections, num) {
   const pathChunks = sections
     .map(({ data: { title } }) => title)
     .filter(title => typeof title === "string" && title.trim().length !== 0)
@@ -29,11 +29,41 @@ function generatePath(sections, num) {
 }
 
 /**
+ *
+ * @param {string} agreementId
+ * @param {KaliData.AgreementArticleWithParentSections} agreementArticleWithParentSections
+ *
+ * @returns {Api.Article}
+ */
+function convertArticleWithParentSectionsToArticle(
+  agreementId,
+  agreementArticleWithParentSections,
+) {
+  const {
+    data: { cid, id, num },
+    sections,
+  } = agreementArticleWithParentSections;
+  const containerId = agreementId;
+  const content = convertHtmlToPlainText(agreementArticleWithParentSections.data.content);
+  const index = num !== undefined ? num : "";
+  const path = generatePathFromSections(sections, num);
+
+  return {
+    cid,
+    containerId,
+    content,
+    id,
+    index,
+    path,
+  };
+}
+
+/**
  * @param {string} agreementIdOrIdcc
  *
- * @returns {Api.EnrichedAgreementArticle[]}
+ * @returns {Api.Article[]}
  */
-export default function getEnrichedAgreementsArticles(agreementIdOrIdcc) {
+export default function getAgreementsArticles(agreementIdOrIdcc) {
   try {
     // Use internal lib to take advantage of cache:
     const agreement = getAgreementByIdOrIdcc(agreementIdOrIdcc);
@@ -48,16 +78,12 @@ export default function getEnrichedAgreementsArticles(agreementIdOrIdcc) {
 
     const articlesWithParentSections = getAgreementArticlesWithParentSections(agreementId);
 
-    /** @type {Api.EnrichedAgreementArticle[]} */
-    const EnrichedAgreementArticles = articlesWithParentSections.map(({ data, sections }) => ({
-      ...data,
-      content: convertHtmlToPlainText(data.content),
-      path: generatePath(sections, data.num),
-    }));
+    const articles = articlesWithParentSections.map(articleWithParentSections =>
+      convertArticleWithParentSectionsToArticle(agreementId, articleWithParentSections),
+    );
+    cache.set(cacheKey, articles);
 
-    cache.set(cacheKey, EnrichedAgreementArticles);
-
-    return EnrichedAgreementArticles;
+    return articles;
   } catch (err) {
     throw new ApiError(err.message, 500, "libs/getEnrichedAgreementsArticles()");
   }
