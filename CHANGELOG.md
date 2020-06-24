@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/SocialGouv/cdtn-api/compare/v1.2.10...v1.3.0) (2020-06-24)
+
+
+### Features
+
+* add container id in articles list ([#12](https://github.com/SocialGouv/cdtn-api/issues/12)) ([7adefe5](https://github.com/SocialGouv/cdtn-api/commit/7adefe5f85ec0ac95f27bd9c8493acbf7302954d))
+
 ## [1.2.10](https://github.com/SocialGouv/cdtn-api/compare/v1.2.9...v1.2.10) (2020-06-22)
 
 
