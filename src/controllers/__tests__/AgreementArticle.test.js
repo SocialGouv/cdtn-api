@@ -83,15 +83,44 @@ describe(`controllers/AgreementArticle`, () => {
           path: expect.any(String),
         });
       });
+
+      it(`with a comma-separated list of article CIDs`, () => {
+        const ctx = {
+          ...koaContextMock,
+          query: {
+            articleIdsOrCids: "KALIARTI000020960580,KALIARTI000038632552",
+          },
+        };
+
+        AgreementArticle.index(ctx);
+
+        expect(ctx.throw).not.toHaveBeenCalled();
+        expect(ctx.body.length).toBe(2);
+        expect(ctx.body).toMatchObject([
+          {
+            cid: "KALIARTI000020960580",
+            containerId: "KALICONT000005635091",
+            content: expect.any(String),
+            id: expect.any(String),
+            index: expect.any(String),
+            path: expect.any(String),
+          },
+          {
+            cid: "KALIARTI000038632552",
+            containerId: "KALICONT000038661444",
+            content: expect.any(String),
+            id: expect.any(String),
+            index: expect.any(String),
+            path: expect.any(String),
+          },
+        ]);
+      });
     });
 
     describe(`should throw`, () => {
-      it(`with an undefined <agreementIdOrIdcc> query`, () => {
+      it(`with an undefined <agreementIdOrIdcc> query AND an undefined <articleIdsOrCids>`, () => {
         const ctx = {
           ...koaContextMock,
-          query: {
-            query: "1.2",
-          },
         };
 
         AgreementArticle.index(ctx);
@@ -99,45 +128,75 @@ describe(`controllers/AgreementArticle`, () => {
         expect(ctx.throw).toHaveBeenCalledTimes(1);
       });
 
-      it(`with a non-string <agreementIdOrIdcc> query`, () => {
-        const ctx = {
-          ...koaContextMock,
-          query: {
-            agreementIdOrIdcc: 123,
-            query: "1.2",
-          },
-        };
+      describe(`with an <agreementIdOrIdcc> query`, () => {
+        it(`but a non-string one`, () => {
+          const ctx = {
+            ...koaContextMock,
+            query: {
+              agreementIdOrIdcc: 123,
+              query: "1.2",
+            },
+          };
 
-        AgreementArticle.index(ctx);
+          AgreementArticle.index(ctx);
 
-        expect(ctx.throw).toHaveBeenCalledTimes(1);
+          expect(ctx.throw).toHaveBeenCalledTimes(1);
+        });
+
+        it(`and an undefined <query> query`, () => {
+          const ctx = {
+            ...koaContextMock,
+            query: {
+              agreementIdOrIdcc: "KALICONT000005635091",
+            },
+          };
+
+          AgreementArticle.index(ctx);
+
+          expect(ctx.throw).toHaveBeenCalledTimes(1);
+        });
+
+        it(`and a non-string <query> query`, () => {
+          const ctx = {
+            ...koaContextMock,
+            query: {
+              agreementIdOrIdcc: "KALICONT000005635091",
+              query: 123,
+            },
+          };
+
+          AgreementArticle.index(ctx);
+
+          expect(ctx.throw).toHaveBeenCalledTimes(1);
+        });
       });
 
-      it(`with an undefined <query> query`, () => {
-        const ctx = {
-          ...koaContextMock,
-          query: {
-            agreementIdOrIdcc: "KALICONT000005635091",
-          },
-        };
+      describe(`with an <articleIdsOrCids> query`, () => {
+        it(`but a non-string one`, () => {
+          const ctx = {
+            ...koaContextMock,
+            query: {
+              articleIdsOrCids: 123,
+            },
+          };
 
-        AgreementArticle.index(ctx);
+          AgreementArticle.index(ctx);
 
-        expect(ctx.throw).toHaveBeenCalledTimes(1);
-      });
+          expect(ctx.throw).toHaveBeenCalledTimes(1);
+        });
 
-      it(`with a non-string <query> query`, () => {
-        const ctx = {
-          ...koaContextMock,
-          query: {
-            agreementIdOrIdcc: "KALICONT000005635091",
-            query: 123,
-          },
-        };
+        it(`but a malformed one`, () => {
+          const ctx = {
+            ...koaContextMock,
+            query: {
+              articleIdsOrCids: "A_MALFORMED_ID",
+            },
+          };
 
-        AgreementArticle.index(ctx);
+          AgreementArticle.index(ctx);
 
-        expect(ctx.throw).toHaveBeenCalledTimes(1);
+          expect(ctx.throw).toHaveBeenCalledTimes(1);
+        });
       });
     });
   });
