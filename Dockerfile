@@ -1,7 +1,10 @@
 FROM node:12.16.3-alpine
 
+ARG TRAVIS
+
 ENV NODE_ENV=production
 ENV PORT=$PORT
+ENV TRAVIS=$TRAVIS
 
 WORKDIR /app
 
