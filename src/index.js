@@ -14,3 +14,5 @@ app.use(cors()).use(router.routes()).use(router.allowedMethods());
 
 app.listen(PORT);
 log.info("api", "Listening on %s (%s).", PORT, NODE_ENV);
+
+import "../scripts/seedCache";

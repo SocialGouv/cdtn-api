@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "nodemon --exec \"node -r esm ./src\" --watch ./src",
-    "docker:restart": "yarn docker:stop && docker-compose up --build -d api",
+    "docker:restart": "yarn docker:stop && docker-compose up --build -d --force-recreate api",
     "docker:start": "docker-compose up -d api",
     "docker:stop": "docker-compose down",
     "start": "cross-env NODE_ENV=production node -r esm ./src",
@@ -33,7 +33,8 @@
     "koa": "2.13.0",
     "node-cache": "5.1.1",
     "npmlog": "4.1.2",
-    "unist-util-flat-filter": "1.0.0"
+    "unist-util-flat-filter": "1.0.0",
+    "wait-on": "5.0.1"
   },
   "devDependencies": {
     "@babel/core": "7.10.3",
