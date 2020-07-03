@@ -2,8 +2,6 @@
 
 import NodeCache from "node-cache";
 
-const DEFAULT_TTL = 7 * 24 * 60 * 60; // => 7d
-
 const cache = new NodeCache();
 
 export default {
@@ -17,9 +15,9 @@ export default {
   /**
    * @param {string} key
    * @param {*} value
-   * @param {number} ttl
+   * @param {number=} ttl
    *
    * @returns {boolean}
    */
-  set: (key, value, ttl = DEFAULT_TTL) => cache.set(key, value, ttl),
+  set: (key, value, ttl = 0) => cache.set(key, value, ttl),
 };

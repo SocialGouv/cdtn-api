@@ -4,8 +4,6 @@ class Health {
    *
    * @example
    * - http://localhost:3000/healthz
-   *
-   * @see https://swagger.io/docs/specification/about/
    */
   get(ctx) {
     ctx.body = { success: true };

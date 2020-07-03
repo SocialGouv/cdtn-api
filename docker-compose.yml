@@ -6,5 +6,7 @@ services:
     build:
       context: .
       shm_size: 1G
+      args:
+        TRAVIS: ${TRAVIS}
     ports:
       - 3000:3000
