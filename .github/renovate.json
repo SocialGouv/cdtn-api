@@ -1,13 +1,7 @@
 {
   "enabled": true,
   "extends": [
-    "github>SocialGouv/renovate-config",
-    ":automergeAll",
-    "docker:disableMajor",
-    "group:allNonMajor",
-    "schedule:earlyMondays"
-  ],
-  "node": {
-    "supportPolicy": ["lts_latest"]
-  }
+    "github>SocialGouv/renovate-config:light",
+    "github>SocialGouv/renovate-config:socialgouv-data"
+  ]
 }
