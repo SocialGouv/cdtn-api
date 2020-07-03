@@ -1,14 +1,16 @@
 import axios from "axios";
 import log from "npmlog";
+import waitOn from "wait-on";
 
 const PORT = Number(process.env.PORT || 3000);
+const BASE_URL = `http://localhost:${PORT}`;
 
 const axiosInstance = axios.create({
-  baseURL: `http://localhost:${PORT}`,
+  baseURL: BASE_URL,
 });
 
-(async () => {
-  if (process.env.TRAVIS !== undefined) {
+async function seedCache() {
+  if (process.env.TRAVIS === "true") {
     await axiosInstance.post("/ready");
 
     return;
@@ -35,4 +37,19 @@ const axiosInstance = axios.create({
 
   await axiosInstance.post("/ready");
   log.info("scripts/seedCache.js", "Cache seeded.");
-})();
+}
+
+waitOn(
+  {
+    resources: [BASE_URL],
+    timeout: 60000,
+  },
+  err => {
+    if (err !== undefined) {
+      log.err("scripts/seedCache.js", err);
+      process.exit(1);
+    }
+
+    seedCache();
+  },
+);
