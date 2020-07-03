@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/SocialGouv/cdtn-api/compare/v1.4.0...v1.4.1) (2020-07-03)
+
+
+### Bug Fixes
+
+* force new release ([#20](https://github.com/SocialGouv/cdtn-api/issues/20)) ([cd82e24](https://github.com/SocialGouv/cdtn-api/commit/cd82e242578aebf66c160041560cdb25dc0246d1))
+
 # [1.4.0](https://github.com/SocialGouv/cdtn-api/compare/v1.3.0...v1.4.0) (2020-07-03)
 
 
