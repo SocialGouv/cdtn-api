@@ -110,6 +110,13 @@
         "parameters": [
           {
             "in": "query",
+            "name": "articleIdsOrCids",
+            "description": "Comma-separated list of agreement article IDs or CIDs.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
             "name": "agreementIdOrIdcc",
             "description": "Agreement ID or IDCC.",
             "required": false,
@@ -117,16 +124,9 @@
           },
           {
             "in": "query",
-            "name": "codeId",
-            "description": "Code ID.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "in": "query",
             "name": "query",
             "description": "Search query.",
-            "required": true,
+            "required": false,
             "type": "string"
           }
         ],
@@ -218,16 +218,23 @@
         "parameters": [
           {
             "in": "query",
+            "name": "articleIdsOrCids",
+            "description": "Comma-separated list of code article IDs or CIDs.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
             "name": "codeId",
             "description": "Code ID.",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {
             "in": "query",
             "name": "query",
             "description": "Search query.",
-            "required": true,
+            "required": false,
             "type": "string"
           }
         ],

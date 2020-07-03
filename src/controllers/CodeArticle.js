@@ -31,26 +31,43 @@ class CodeArticle {
    *
    * @example
    * - http://localhost:3000/code/articles?codeId=LEGITEXT000006072050&query=L1234
+   * - http://localhost:3000/code/articles?articleIdsOrCids=LEGIARTI000006901112,LEGIARTI000006901119
    */
   index(ctx) {
     try {
-      const { codeId, query } = ctx.query;
+      const { articleIdsOrCids, codeId, query } = ctx.query;
 
       switch (true) {
-        case typeof codeId === "undefined":
-          throw new ApiError("The `codeId` query parameter is mandatory.", 422);
+        case typeof codeId === "undefined" && typeof articleIdsOrCids === "undefined":
+          throw new ApiError(
+            "At least one of `codeId`, `articleIdsOrCids` query parameters is mandatory.",
+            422,
+          );
 
-        case typeof codeId !== "string":
+        case typeof codeId !== "undefined" && typeof codeId !== "string":
           throw new ApiError("The `codeId` query parameter must be a {string}.", 422);
 
-        case typeof query === "undefined":
+        case typeof codeId !== "undefined" && typeof query === "undefined":
           throw new ApiError("The `query` query parameter is mandatory.", 422);
 
-        case typeof query !== "string":
+        case typeof codeId !== "undefined" && typeof query !== "string":
           throw new ApiError("The `query` query parameter must be a {string}.", 422);
+
+        case typeof articleIdsOrCids !== "undefined" && typeof articleIdsOrCids !== "string":
+          throw new ApiError("The `articleIdsOrCids` query parameter must be a {string}.", 422);
+
+        case typeof articleIdsOrCids !== "undefined" &&
+          !/^LEGIARTI\d{12}(,LEGIARTI\d{12})*$/.test(articleIdsOrCids):
+          throw new ApiError(
+            "The `articleIdsOrCids` query parameter must be comma-separated list of code article IDs or CIDs.",
+            422,
+          );
       }
 
-      const body = findCodeArticles(codeId, query);
+      const body =
+        codeId !== undefined
+          ? findCodeArticles(codeId, query)
+          : articleIdsOrCids.split(",").map(getCodeArticleByIdOrCid);
 
       ctx.body = body;
     } catch (err) {
