@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/SocialGouv/cdtn-api/compare/v1.3.0...v1.4.0) (2020-07-03)
+
+
+### Bug Fixes
+
+* copy missing script in dockerfile ([#18](https://github.com/SocialGouv/cdtn-api/issues/18)) ([8ca4ab0](https://github.com/SocialGouv/cdtn-api/commit/8ca4ab0df07ead7ab2711bfa4cef928af38dbd0a))
+
+
+### Features
+
+* add articles batch call ([#17](https://github.com/SocialGouv/cdtn-api/issues/17)) ([1b47258](https://github.com/SocialGouv/cdtn-api/commit/1b47258010eff904decdf074ce3ae906a314290e))
+
 # [1.3.0](https://github.com/SocialGouv/cdtn-api/compare/v1.2.10...v1.3.0) (2020-06-24)
 
 
