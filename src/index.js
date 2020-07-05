@@ -1,6 +1,8 @@
 import cors from "@koa/cors";
+import childProcess from "child_process";
 import Koa from "koa";
 import log from "npmlog";
+import path from "path";
 
 import router from "./middlewares/router";
 
@@ -15,4 +17,5 @@ app.use(cors()).use(router.routes()).use(router.allowedMethods());
 app.listen(PORT);
 log.info("api", "Listening on %s (%s).", PORT, NODE_ENV);
 
-import "../scripts/seedCache";
+const seedCacheScriptPath = path.join(__dirname, "../scripts/seedCache");
+childProcess.fork(seedCacheScriptPath);

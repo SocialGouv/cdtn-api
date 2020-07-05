@@ -4,6 +4,7 @@
   "license": "Apache-2.0",
   "private": true,
   "scripts": {
+    "cache": "node -r esm ./scripts/seedCache.js",
     "dev": "nodemon --exec \"node -r esm ./src\" --watch ./src",
     "docker:restart": "yarn docker:stop && docker-compose up --build -d --force-recreate api",
     "docker:start": "docker-compose up -d api",
