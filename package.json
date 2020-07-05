@@ -32,16 +32,16 @@
     "fuse.js": "6.4.0",
     "html-to-text": "5.1.1",
     "koa": "2.13.0",
-    "node-cache": "5.1.1",
+    "node-cache": "5.1.2",
     "npmlog": "4.1.2",
     "unist-util-flat-filter": "1.0.0",
     "wait-on": "5.0.1"
   },
   "devDependencies": {
-    "@babel/core": "7.10.3",
-    "@babel/plugin-transform-runtime": "7.10.3",
-    "@babel/polyfill": "7.10.1",
-    "@babel/preset-env": "7.10.3",
+    "@babel/core": "7.10.4",
+    "@babel/plugin-transform-runtime": "7.10.4",
+    "@babel/polyfill": "7.10.4",
+    "@babel/preset-env": "7.10.4",
     "@socialgouv/eslint-config-strict": "1.0.0-beta.5",
     "@types/jest": "26.0.3",
     "@types/koa": "2.11.3",
@@ -55,7 +55,7 @@
     "nodemon": "2.0.4",
     "prettier": "2.0.5",
     "swagger-cli": "4.0.3",
-    "typescript": "3.9.5",
+    "typescript": "3.9.6",
     "waait": "1.0.5"
   },
   "husky": {
