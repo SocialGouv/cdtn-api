@@ -22,23 +22,4 @@ describe(`controllers/Ready`, () => {
       expect(ctx.throw).toHaveBeenCalledWith(404);
     });
   });
-
-  describe(`#post()`, () => {
-    it(`should set "isCached" cache key`, () => {
-      const ctx = {
-        ...koaContextMock,
-      };
-
-      Ready.post(ctx);
-
-      expect(ctx.throw).not.toHaveBeenCalled();
-      expect(ctx.statusCode).toBe(201);
-
-      Ready.get(ctx);
-
-      expect(ctx.throw).not.toHaveBeenCalled();
-      expect(ctx.statusCode).toBe(200);
-      expect(ctx.body).toMatchObject({});
-    });
-  });
 });

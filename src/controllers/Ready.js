@@ -15,15 +15,6 @@ class Ready {
     ctx.statusCode = 200;
     ctx.body = {};
   }
-
-  /**
-   * @param {import("koa").Context} ctx
-   */
-  post(ctx) {
-    cache.set("isCached", true);
-
-    ctx.statusCode = 201;
-  }
 }
 
 export default new Ready();

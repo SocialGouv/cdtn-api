@@ -27,6 +27,5 @@ router.get("/codes", CodeController.index);
 router.get("/healthz", HealthController.get);
 
 router.get("/ready", ReadyController.get);
-router.post("/ready", ReadyController.post);
 
 export default router;
