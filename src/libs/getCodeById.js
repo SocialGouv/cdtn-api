@@ -9,14 +9,14 @@ import cache from "../helpers/cache";
  *
  * @param {string} id
  *
- * @returns {LegiData.CodeWithParents}
+ * @returns {Promise<LegiData.CodeWithParents>}
  */
-export default function getCodeById(id) {
-  const cacheKey = `code-${id}`;
+export default async function getCodeById(id) {
+  const cacheKey = `CODE:${id}`;
 
   // Return cached agreement if available:
-  const maybeCachedCode = cache.get(cacheKey);
-  if (maybeCachedCode !== undefined) {
+  const maybeCachedCode = await cache.get(cacheKey);
+  if (maybeCachedCode !== null) {
     return maybeCachedCode;
   }
 

@@ -1,19 +1,21 @@
+import answerWithError from "../../helpers/answerWithError";
 import Agreement from "../Agreement";
+
+jest.mock("../../helpers/answerWithError");
 
 describe(`controllers/Agreement`, () => {
   const koaContextMock = {
     params: {},
     query: {},
-    throw: jest.fn(),
   };
 
   beforeEach(() => {
-    koaContextMock.throw.mockReset();
+    answerWithError.mockReset();
   });
 
   describe(`#get()`, () => {
     describe(`should fill body with the expected data`, () => {
-      it(`with an agreement ID`, () => {
+      it(`with an agreement ID`, async () => {
         const ctx = {
           ...koaContextMock,
           params: {
@@ -21,9 +23,9 @@ describe(`controllers/Agreement`, () => {
           },
         };
 
-        Agreement.get(ctx);
+        await Agreement.get(ctx);
 
-        expect(ctx.throw).not.toHaveBeenCalled();
+        expect(answerWithError).not.toHaveBeenCalled();
         expect(ctx.body).toMatchObject({
           data: {
             id: "KALICONT000005635091",
@@ -32,7 +34,7 @@ describe(`controllers/Agreement`, () => {
         });
       });
 
-      it(`with an agreement IDCC`, () => {
+      it(`with an agreement IDCC`, async () => {
         const ctx = {
           ...koaContextMock,
           params: {
@@ -40,9 +42,9 @@ describe(`controllers/Agreement`, () => {
           },
         };
 
-        Agreement.get(ctx);
+        await Agreement.get(ctx);
 
-        expect(ctx.throw).not.toHaveBeenCalled();
+        expect(answerWithError).not.toHaveBeenCalled();
         expect(ctx.body).toMatchObject({
           data: {
             id: "KALICONT000005635091",
@@ -62,7 +64,7 @@ describe(`controllers/Agreement`, () => {
 
         Agreement.index(ctx);
 
-        expect(ctx.throw).not.toHaveBeenCalled();
+        expect(answerWithError).not.toHaveBeenCalled();
         expect(ctx.body.length).toBeGreaterThanOrEqual(1);
       });
 
@@ -76,7 +78,7 @@ describe(`controllers/Agreement`, () => {
 
         Agreement.index(ctx);
 
-        expect(ctx.throw).not.toHaveBeenCalled();
+        expect(answerWithError).not.toHaveBeenCalled();
         expect(ctx.body).toHaveLength(1);
         expect(ctx.body[0]).toMatchObject({
           id: "KALICONT000005635444",
@@ -96,7 +98,7 @@ describe(`controllers/Agreement`, () => {
 
         Agreement.index(ctx);
 
-        expect(ctx.throw).toHaveBeenCalledTimes(1);
+        expect(answerWithError).toHaveBeenCalledTimes(1);
       });
     });
   });

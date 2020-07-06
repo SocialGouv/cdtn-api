@@ -1,4 +1,4 @@
-describe(`[GET] /agreement`, () => {
+describe(`[GET] /agreements`, () => {
   it(`should pass`, async () => {
     const { data: received } = await axios.get("/agreements");
 

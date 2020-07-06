@@ -1,6 +1,6 @@
 // @ts-check
 
-import { getAgreement } from "@socialgouv/kali-data";
+import { getAgreement, getAgreementIdFromIdOrIdcc } from "@socialgouv/kali-data";
 
 import cache from "../helpers/cache";
 
@@ -9,18 +9,19 @@ import cache from "../helpers/cache";
  *
  * @param {number | string} idOrIdcc
  *
- * @returns {KaliData.Agreement}
+ * @returns {Promise<KaliData.Agreement>}
  */
-export default function getAgreementByIdOrIdcc(idOrIdcc) {
-  const cacheKey = `agreement-${idOrIdcc}`;
+export default async function getAgreementByIdOrIdcc(idOrIdcc) {
+  const id = getAgreementIdFromIdOrIdcc(idOrIdcc);
+  const cacheKey = `AGREEMENT:${id}`;
 
   // Return cached agreement if available:
-  const maybeCachedAgreement = cache.get(cacheKey);
-  if (maybeCachedAgreement !== undefined) {
+  const maybeCachedAgreement = await cache.get(cacheKey);
+  if (maybeCachedAgreement !== null) {
     return maybeCachedAgreement;
   }
 
-  const agreement = getAgreement(idOrIdcc);
+  const agreement = getAgreement(id);
   cache.set(cacheKey, agreement);
 
   return agreement;

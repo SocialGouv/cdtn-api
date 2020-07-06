@@ -12,15 +12,15 @@ class CodeArticle {
    * @example
    * - http://localhost:3000/code/article/LEGIARTI000006901112
    */
-  get(ctx) {
+  async get(ctx) {
     try {
       const { idOrCid } = ctx.params;
 
-      const body = getCodeArticleByIdOrCid(idOrCid);
+      const body = await getCodeArticleByIdOrCid(idOrCid);
 
       ctx.body = body;
     } catch (err) {
-      answerWithError("controllers/CodeArticle#get()", err, ctx);
+      answerWithError("controllers/CodeArticle#get()", err, ctx, 400);
     }
   }
 
@@ -33,7 +33,7 @@ class CodeArticle {
    * - http://localhost:3000/code/articles?codeId=LEGITEXT000006072050&query=L1234
    * - http://localhost:3000/code/articles?articleIdsOrCids=LEGIARTI000006901112,LEGIARTI000006901119
    */
-  index(ctx) {
+  async index(ctx) {
     try {
       const { articleIdsOrCids, codeId, query } = ctx.query;
 
@@ -66,12 +66,12 @@ class CodeArticle {
 
       const body =
         codeId !== undefined
-          ? findCodeArticles(codeId, query)
-          : articleIdsOrCids.split(",").map(getCodeArticleByIdOrCid);
+          ? await findCodeArticles(codeId, query)
+          : await Promise.all(articleIdsOrCids.split(",").map(getCodeArticleByIdOrCid));
 
       ctx.body = body;
     } catch (err) {
-      answerWithError("controllers/CodeArticle#index()", err, ctx);
+      answerWithError("controllers/CodeArticle#index()", err, ctx, 400);
     }
   }
 }

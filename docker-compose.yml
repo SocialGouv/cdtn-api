@@ -1,12 +1,31 @@
 version: "3.8"
 
 services:
-  api:
+  redis:
+    image: redis:6
     restart: always
+    ports:
+      - 6379:6379
+
+  api:
     build:
       context: .
       shm_size: 1G
-      args:
-        TRAVIS: ${TRAVIS}
+    restart: always
     ports:
       - 3000:3000
+    environment:
+      PORT: ${PORT}
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      - redis
+
+  init:
+    build:
+      context: .
+      dockerfile: init.Dockerfile
+      shm_size: 1G
+    environment:
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      - redis

@@ -6,7 +6,6 @@ import CodeController from "../controllers/Code";
 import CodeArticleController from "../controllers/CodeArticle";
 import HealthController from "../controllers/Health";
 import IndexController from "../controllers/Index";
-import ReadyController from "../controllers/Ready";
 
 const router = new KoaRouter();
 
@@ -25,7 +24,5 @@ router.get("/code/:id", CodeController.get);
 router.get("/codes", CodeController.index);
 
 router.get("/healthz", HealthController.get);
-
-router.get("/ready", ReadyController.get);
 
 export default router;

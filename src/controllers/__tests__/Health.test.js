@@ -1,14 +1,16 @@
+import answerWithError from "../../helpers/answerWithError";
 import Health from "../Health";
+
+jest.mock("../../helpers/answerWithError");
 
 describe(`controllers/Health`, () => {
   const koaContextMock = {
     params: {},
     query: {},
-    throw: jest.fn(),
   };
 
   beforeEach(() => {
-    koaContextMock.throw.mockReset();
+    answerWithError.mockReset();
   });
 
   describe(`#get()`, () => {
@@ -20,7 +22,7 @@ describe(`controllers/Health`, () => {
 
         Health.get(ctx);
 
-        expect(ctx.throw).not.toHaveBeenCalled();
+        expect(answerWithError).not.toHaveBeenCalled();
         expect(ctx.body).toMatchObject({
           success: true,
         });

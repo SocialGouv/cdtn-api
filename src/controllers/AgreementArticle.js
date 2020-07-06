@@ -12,15 +12,15 @@ class AgreementArticle {
    * @example
    * - http://localhost:3000/agreement/article/KALIARTI000030641746
    */
-  get(ctx) {
+  async get(ctx) {
     try {
       const { idOrCid } = ctx.params;
 
-      const body = getAgreementArticleByIdOrCid(idOrCid);
+      const body = await getAgreementArticleByIdOrCid(idOrCid);
 
       ctx.body = body;
     } catch (err) {
-      answerWithError("controllers/AgreementArticle#get()", err, ctx);
+      answerWithError("controllers/AgreementArticle#get()", err, ctx, 400);
     }
   }
 
@@ -38,7 +38,7 @@ class AgreementArticle {
    * - http://localhost:3000/agreement/articles?agreementIdOrIdcc=KALICONT000005635091&query=1.2
    * - http://localhost:3000/agreement/articles?articleIdsOrCids=KALIARTI000020960580,KALIARTI000038632552
    */
-  index(ctx) {
+  async index(ctx) {
     try {
       const { agreementIdOrIdcc, articleIdsOrCids, query } = ctx.query;
 
@@ -71,12 +71,12 @@ class AgreementArticle {
 
       const body =
         agreementIdOrIdcc !== undefined
-          ? findAgreementArticles(agreementIdOrIdcc, query)
-          : articleIdsOrCids.split(",").map(getAgreementArticleByIdOrCid);
+          ? await findAgreementArticles(agreementIdOrIdcc, query)
+          : await Promise.all(articleIdsOrCids.split(",").map(getAgreementArticleByIdOrCid));
 
       ctx.body = body;
     } catch (err) {
-      answerWithError("controllers/AgreementArticle#index()", err, ctx);
+      answerWithError("controllers/AgreementArticle#index()", err, ctx, 400);
     }
   }
 }
