@@ -7,12 +7,17 @@ variables:
   AUTO_DEVOPS_RELEASE_AUTO: "🔖"
   AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
 
+#
+
 Build:
+  cache: {}
+  dependencies: []
   script:
     - echo "look ma, no build"
 
 Register image:
   extends: .autodevops_register_image
+  needs: []
   variables:
     DOCKER_BUILD_ARGS: >-
       --shm-size 1g
