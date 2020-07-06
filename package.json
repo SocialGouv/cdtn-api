@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "nodemon --exec \"node -r esm ./src\" --watch ./src",
+    "k8s": "yarn --silent --cwd .k8s",
     "docker:restart": "yarn docker:stop && docker-compose up --build -d --force-recreate api",
     "docker:start": "docker-compose up -d api",
     "docker:stop": "docker-compose down",
