@@ -12,7 +12,6 @@ COPY package.json yarn.lock /app/
 
 RUN yarn --frozen-lockfile --cache-folder /dev/shm/yarn
 
-COPY scripts /app/scripts
 COPY src /app/src
 
 USER node

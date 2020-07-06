@@ -4,7 +4,6 @@
   "license": "Apache-2.0",
   "private": true,
   "scripts": {
-    "cache": "node -r esm ./scripts/seedCache.js",
     "dev": "nodemon --exec \"node -r esm ./src\" --watch ./src",
     "docker:restart": "yarn docker:stop && docker-compose up --build -d --force-recreate api",
     "docker:start": "docker-compose up -d api",
@@ -26,7 +25,6 @@
     "@koa/router": "9.0.1",
     "@socialgouv/kali-data": "1.79.0",
     "@socialgouv/legi-data": "1.22.0",
-    "axios": "0.19.2",
     "cross-env": "7.0.2",
     "esm": "3.2.25",
     "fuse.js": "6.4.0",
@@ -34,8 +32,7 @@
     "koa": "2.13.0",
     "node-cache": "5.1.2",
     "npmlog": "4.1.2",
-    "unist-util-flat-filter": "1.0.0",
-    "wait-on": "5.0.1"
+    "unist-util-flat-filter": "1.0.0"
   },
   "devDependencies": {
     "@babel/core": "7.10.4",
@@ -46,6 +43,7 @@
     "@types/jest": "26.0.3",
     "@types/koa": "2.11.3",
     "@types/node": "14.0.14",
+    "axios": "0.19.2",
     "babel-eslint": "10.1.0",
     "babel-jest": "26.1.0",
     "eslint": "7.3.1",
