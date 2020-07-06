@@ -1,3 +1,13 @@
+## [1.4.2](https://github.com/SocialGouv/cdtn-api/compare/v1.4.1...v1.4.2) (2020-07-06)
+
+
+### Bug Fixes
+
+* **gitlab:** update socialgouv/gitlab-ci-yml to v17.0.0-beta.31 ([#29](https://github.com/SocialGouv/cdtn-api/issues/29)) ([6eb926a](https://github.com/SocialGouv/cdtn-api/commit/6eb926ad966df57416c97e62bd8fc589fdc87d84))
+* disable cache seeding ([#24](https://github.com/SocialGouv/cdtn-api/issues/24)) ([af5637a](https://github.com/SocialGouv/cdtn-api/commit/af5637ad1b930839bca357e9feec578439aa4ad6))
+* run cache seeding in a forked child process ([#22](https://github.com/SocialGouv/cdtn-api/issues/22)) ([6075790](https://github.com/SocialGouv/cdtn-api/commit/60757901a6292df206976e0e6791ae1ab66164f2))
+* switch cache seeding from script strategy to core code helper ([#23](https://github.com/SocialGouv/cdtn-api/issues/23)) ([7d0b887](https://github.com/SocialGouv/cdtn-api/commit/7d0b88730f3fbe162cc8437da6b98eb9660c442a))
+
 ## [1.4.1](https://github.com/SocialGouv/cdtn-api/compare/v1.4.0...v1.4.1) (2020-07-03)
 
 
