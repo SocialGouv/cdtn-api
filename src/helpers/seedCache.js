@@ -9,7 +9,7 @@ import getAgreementsArticles from "../libs/getAgreementsArticles";
 import getCodesArticles from "../libs/getCodesArticles";
 
 export default function seedCache() {
-  if (process.env.TRAVIS === "true") return;
+  if (process.env.CI === "true") return;
 
   // ==================================================
   // Agreements
