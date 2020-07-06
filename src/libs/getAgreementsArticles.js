@@ -1,6 +1,6 @@
 // @ts-check
 
-import { getAgreementArticlesWithParentSections } from "@socialgouv/kali-data";
+import { getAgreementArticlesWithPath } from "@socialgouv/kali-data";
 
 import cache from "../helpers/cache";
 import convertHtmlToPlainText from "../helpers/convertHtmlToPlainText";
@@ -8,45 +8,19 @@ import ApiError from "./ApiError";
 import getAgreementByIdOrIdcc from "./getAgreementByIdOrIdcc";
 
 /**
- * @param {KaliData.AgreementArticleWithParentSections["sections"]} sections
- * @param {string=} num Article Index
- *
- * @returns {string}
- */
-function generatePathFromSections(sections, num) {
-  const pathChunks = sections
-    .map(({ data: { title } }) => title)
-    .filter(title => typeof title === "string" && title.trim().length !== 0)
-    .map(title => title.trim().replace(/\s+/g, " "));
-
-  if (typeof num === "string") {
-    pathChunks.push(`Article ${num}`);
-  }
-
-  const path = pathChunks.join(" » ");
-
-  return path;
-}
-
-/**
- *
  * @param {string} agreementId
- * @param {KaliData.AgreementArticleWithParentSections} agreementArticleWithParentSections
+ * @param {KaliData.AgreementArticleWithPath} agreementArticleWithPath
  *
  * @returns {Api.Article}
  */
-function convertArticleWithParentSectionsToArticle(
-  agreementId,
-  agreementArticleWithParentSections,
-) {
+function normalizeArticle(agreementId, agreementArticleWithPath) {
   const {
     data: { cid, id, num },
-    sections,
-  } = agreementArticleWithParentSections;
+  } = agreementArticleWithPath;
   const containerId = agreementId;
-  const content = convertHtmlToPlainText(agreementArticleWithParentSections.data.content);
+  const content = convertHtmlToPlainText(agreementArticleWithPath.data.content);
   const index = num !== undefined ? num : "";
-  const path = generatePathFromSections(sections, num);
+  const path = agreementArticleWithPath.path.join(" » ");
 
   return {
     cid,
@@ -61,30 +35,30 @@ function convertArticleWithParentSectionsToArticle(
 /**
  * @param {string} agreementIdOrIdcc
  *
- * @returns {Api.Article[]}
+ * @returns {Promise<Api.Article[]>}
  */
-export default function getAgreementsArticles(agreementIdOrIdcc) {
+export default async function getAgreementsArticles(agreementIdOrIdcc) {
   try {
     // Use internal lib to take advantage of cache:
-    const agreement = getAgreementByIdOrIdcc(agreementIdOrIdcc);
+    const agreement = await getAgreementByIdOrIdcc(agreementIdOrIdcc);
     const agreementId = agreement.data.id;
-    const cacheKey = `agreementArticles-${agreementId}`;
+    const cacheKey = `AGREEMENT:${agreementId}:ARTICLES`;
 
-    // Return cached enriched articles if available for this agreement:
-    const maybeCachedEnrichedAgreementArticles = cache.get(cacheKey);
-    if (maybeCachedEnrichedAgreementArticles !== undefined) {
-      return maybeCachedEnrichedAgreementArticles;
+    // Return cached articles if available for this agreement:
+    const maybeCachedAgreementArticles = await cache.get(cacheKey);
+    if (maybeCachedAgreementArticles !== null) {
+      return maybeCachedAgreementArticles;
     }
 
-    const articlesWithParentSections = getAgreementArticlesWithParentSections(agreementId);
+    const articlesWithPath = getAgreementArticlesWithPath(agreementId);
 
-    const articles = articlesWithParentSections.map(articleWithParentSections =>
-      convertArticleWithParentSectionsToArticle(agreementId, articleWithParentSections),
+    const articles = articlesWithPath.map(articleWithParentSections =>
+      normalizeArticle(agreementId, articleWithParentSections),
     );
     cache.set(cacheKey, articles);
 
     return articles;
   } catch (err) {
-    throw new ApiError(err.message, 500, "libs/getEnrichedAgreementsArticles()");
+    throw new ApiError(err.message, 400, "libs/getAgreementsArticles()");
   }
 }

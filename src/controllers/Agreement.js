@@ -12,15 +12,15 @@ class Agreement {
    * @example
    * - http://localhost:3000/agreement/KALICONT000005635444
    */
-  get(ctx) {
+  async get(ctx) {
     try {
       const { idOrIdcc } = ctx.params;
 
-      const body = getAgreementByIdOrIdcc(idOrIdcc);
+      const body = await getAgreementByIdOrIdcc(idOrIdcc);
 
       ctx.body = body;
     } catch (err) {
-      answerWithError("controllers/Agreement#get()", err, ctx);
+      answerWithError("controllers/Agreement#get()", err, ctx, 400);
     }
   }
 
@@ -44,7 +44,7 @@ class Agreement {
 
       ctx.body = body;
     } catch (err) {
-      answerWithError("controllers/Agreement#index()", err, ctx);
+      answerWithError("controllers/Agreement#index()", err, ctx, 400);
     }
   }
 }

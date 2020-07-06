@@ -1,19 +1,21 @@
+import answerWithError from "../../helpers/answerWithError";
 import CodeArticle from "../CodeArticle";
+
+jest.mock("../../helpers/answerWithError");
 
 describe(`controllers/CodeArticle`, () => {
   const koaContextMock = {
     params: {},
     query: {},
-    throw: jest.fn(),
   };
 
   beforeEach(() => {
-    koaContextMock.throw.mockReset();
+    answerWithError.mockReset();
   });
 
   describe(`#get()`, () => {
     describe(`should fill body with the expected data`, () => {
-      it(`with a code article CID`, () => {
+      it(`with a code article CID`, async () => {
         const ctx = {
           ...koaContextMock,
           params: {
@@ -21,9 +23,9 @@ describe(`controllers/CodeArticle`, () => {
           },
         };
 
-        CodeArticle.get(ctx);
+        await CodeArticle.get(ctx);
 
-        expect(ctx.throw).not.toHaveBeenCalled();
+        expect(answerWithError).not.toHaveBeenCalled();
         expect(ctx.body).toMatchObject({
           cid: "LEGIARTI000006901112",
           containerId: "LEGITEXT000006072050",
@@ -38,7 +40,7 @@ describe(`controllers/CodeArticle`, () => {
 
   describe(`#index()`, () => {
     describe(`should fill body with the expected data`, () => {
-      it(`with a code ID`, () => {
+      it(`with a code ID`, async () => {
         const ctx = {
           ...koaContextMock,
           query: {
@@ -47,9 +49,9 @@ describe(`controllers/CodeArticle`, () => {
           },
         };
 
-        CodeArticle.index(ctx);
+        await CodeArticle.index(ctx);
 
-        expect(ctx.throw).not.toHaveBeenCalled();
+        expect(answerWithError).not.toHaveBeenCalled();
         expect(ctx.body.length).toBeGreaterThanOrEqual(1);
         expect(ctx.body[0]).toMatchObject({
           cid: "LEGIARTI000006901112",
@@ -61,7 +63,7 @@ describe(`controllers/CodeArticle`, () => {
         });
       });
 
-      it(`with a comma-separated list of article CIDs`, () => {
+      it(`with a comma-separated list of article CIDs`, async () => {
         const ctx = {
           ...koaContextMock,
           query: {
@@ -69,9 +71,9 @@ describe(`controllers/CodeArticle`, () => {
           },
         };
 
-        CodeArticle.index(ctx);
+        await CodeArticle.index(ctx);
 
-        expect(ctx.throw).not.toHaveBeenCalled();
+        expect(answerWithError).not.toHaveBeenCalled();
         expect(ctx.body.length).toBe(2);
         expect(ctx.body).toMatchObject([
           {
@@ -95,18 +97,18 @@ describe(`controllers/CodeArticle`, () => {
     });
 
     describe(`should throw`, () => {
-      it(`with an undefined <codeId> query AND an undefined <articleIdsOrCids>`, () => {
+      it(`with an undefined <codeId> query AND an undefined <articleIdsOrCids>`, async () => {
         const ctx = {
           ...koaContextMock,
         };
 
-        CodeArticle.index(ctx);
+        await CodeArticle.index(ctx);
 
-        expect(ctx.throw).toHaveBeenCalledTimes(1);
+        expect(answerWithError).toHaveBeenCalledTimes(1);
       });
 
       describe(`with an <codeId> query`, () => {
-        it(`but a non-string one`, () => {
+        it(`but a non-string one`, async () => {
           const ctx = {
             ...koaContextMock,
             query: {
@@ -115,12 +117,12 @@ describe(`controllers/CodeArticle`, () => {
             },
           };
 
-          CodeArticle.index(ctx);
+          await CodeArticle.index(ctx);
 
-          expect(ctx.throw).toHaveBeenCalledTimes(1);
+          expect(answerWithError).toHaveBeenCalledTimes(1);
         });
 
-        it(`and an undefined <query> query`, () => {
+        it(`and an undefined <query> query`, async () => {
           const ctx = {
             ...koaContextMock,
             query: {
@@ -128,12 +130,12 @@ describe(`controllers/CodeArticle`, () => {
             },
           };
 
-          CodeArticle.index(ctx);
+          await CodeArticle.index(ctx);
 
-          expect(ctx.throw).toHaveBeenCalledTimes(1);
+          expect(answerWithError).toHaveBeenCalledTimes(1);
         });
 
-        it(`and a non-string <query> query`, () => {
+        it(`and a non-string <query> query`, async () => {
           const ctx = {
             ...koaContextMock,
             query: {
@@ -142,14 +144,14 @@ describe(`controllers/CodeArticle`, () => {
             },
           };
 
-          CodeArticle.index(ctx);
+          await CodeArticle.index(ctx);
 
-          expect(ctx.throw).toHaveBeenCalledTimes(1);
+          expect(answerWithError).toHaveBeenCalledTimes(1);
         });
       });
 
       describe(`with an <articleIdsOrCids> query`, () => {
-        it(`but a non-string one`, () => {
+        it(`but a non-string one`, async () => {
           const ctx = {
             ...koaContextMock,
             query: {
@@ -157,12 +159,12 @@ describe(`controllers/CodeArticle`, () => {
             },
           };
 
-          CodeArticle.index(ctx);
+          await CodeArticle.index(ctx);
 
-          expect(ctx.throw).toHaveBeenCalledTimes(1);
+          expect(answerWithError).toHaveBeenCalledTimes(1);
         });
 
-        it(`but a malformed one`, () => {
+        it(`but a malformed one`, async () => {
           const ctx = {
             ...koaContextMock,
             query: {
@@ -170,9 +172,9 @@ describe(`controllers/CodeArticle`, () => {
             },
           };
 
-          CodeArticle.index(ctx);
+          await CodeArticle.index(ctx);
 
-          expect(ctx.throw).toHaveBeenCalledTimes(1);
+          expect(answerWithError).toHaveBeenCalledTimes(1);
         });
       });
     });

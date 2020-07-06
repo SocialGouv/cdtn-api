@@ -35,19 +35,19 @@ function convertCodeArticleToArticle(codeId, codeArticle) {
 /**
  * @param {string} codeId
  *
- * @returns {Api.Article[]}
+ * @returns {Promise<Api.Article[]>}
  */
-export default function getCodesArticles(codeId) {
+export default async function getCodesArticles(codeId) {
   try {
-    const cacheKey = `codeArticles-${codeId}`;
+    const cacheKey = `CODE:${codeId}:ARTICLES`;
 
     // Return cached articles if available for this code:
-    const maybeCodeArticles = cache.get(cacheKey);
-    if (maybeCodeArticles !== undefined) {
+    const maybeCodeArticles = await cache.get(cacheKey);
+    if (maybeCodeArticles !== null) {
       return maybeCodeArticles;
     }
 
-    const codeWithParentSections = getCodeById(codeId);
+    const codeWithParentSections = await getCodeById(codeId);
 
     const codeArticles =
       /** @type {{ children: LegiData.CodeArticle[], type: "root" }} */
@@ -59,6 +59,6 @@ export default function getCodesArticles(codeId) {
 
     return articles;
   } catch (err) {
-    throw new ApiError(err.message, 500, "libs/getEnrichedAgreementsArticles()");
+    throw new ApiError(err.message, 400, "libs/getCodesArticles()");
   }
 }

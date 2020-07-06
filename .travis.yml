@@ -21,6 +21,7 @@ jobs:
       env:
         - NODE_ENV=production
         - DOCKER_COMPOSE_VERSION=1.26.0
+        - REDIS_URL=http://localhost:6379
       services:
         - docker
       before_install:

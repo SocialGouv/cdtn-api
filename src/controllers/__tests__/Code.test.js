@@ -1,19 +1,21 @@
+import answerWithError from "../../helpers/answerWithError";
 import Code from "../Code";
+
+jest.mock("../../helpers/answerWithError");
 
 describe(`controllers/Code`, () => {
   const koaContextMock = {
     params: {},
     query: {},
-    throw: jest.fn(),
   };
 
   beforeEach(() => {
-    koaContextMock.throw.mockReset();
+    answerWithError.mockReset();
   });
 
   describe(`#get()`, () => {
     describe(`should fill body with the expected data`, () => {
-      it(`with a code ID`, () => {
+      it(`with a code ID`, async () => {
         const ctx = {
           ...koaContextMock,
           params: {
@@ -21,9 +23,9 @@ describe(`controllers/Code`, () => {
           },
         };
 
-        Code.get(ctx);
+        await Code.get(ctx);
 
-        expect(ctx.throw).not.toHaveBeenCalled();
+        expect(answerWithError).not.toHaveBeenCalled();
         expect(ctx.body).toMatchObject({
           data: {
             id: "LEGITEXT000006073189",
@@ -42,7 +44,7 @@ describe(`controllers/Code`, () => {
 
         Code.index(ctx);
 
-        expect(ctx.throw).not.toHaveBeenCalled();
+        expect(answerWithError).not.toHaveBeenCalled();
         expect(ctx.body.length).toBeGreaterThanOrEqual(1);
       });
 
@@ -56,7 +58,7 @@ describe(`controllers/Code`, () => {
 
         Code.index(ctx);
 
-        expect(ctx.throw).not.toHaveBeenCalled();
+        expect(answerWithError).not.toHaveBeenCalled();
         expect(ctx.body).toHaveLength(1);
         expect(ctx.body[0]).toMatchObject({
           id: "LEGITEXT000006073189",
@@ -75,7 +77,7 @@ describe(`controllers/Code`, () => {
 
         Code.index(ctx);
 
-        expect(ctx.throw).toHaveBeenCalledTimes(1);
+        expect(answerWithError).toHaveBeenCalledTimes(1);
       });
     });
   });

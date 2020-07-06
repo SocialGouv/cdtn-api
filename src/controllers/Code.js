@@ -12,15 +12,15 @@ class Agreement {
    * @example
    * - http://localhost:3000/code/LEGITEXT000006072050
    */
-  get(ctx) {
+  async get(ctx) {
     try {
       const { id } = ctx.params;
 
-      const body = getCodeById(id);
+      const body = await getCodeById(id);
 
       ctx.body = body;
     } catch (err) {
-      answerWithError("controllers/Agreement#get()", err, ctx);
+      answerWithError("controllers/Agreement#get()", err, ctx, 400);
     }
   }
 
@@ -44,7 +44,7 @@ class Agreement {
 
       ctx.body = body;
     } catch (err) {
-      answerWithError("controllers/Agreement#index()", err, ctx);
+      answerWithError("controllers/Agreement#index()", err, ctx, 400);
     }
   }
 }

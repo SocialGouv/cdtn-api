@@ -11,12 +11,12 @@ import getAgreementsArticles from "./getAgreementsArticles";
  * @param {string} agreementIdOrIdcc
  * @param {string} query
  *
- * @returns {Api.Article[]}
+ * @returns {Promise<Api.Article[]>}
  *
  * TODO Extract query cleaning into a separate helper.
  */
-export default function findAgreementArticles(agreementIdOrIdcc, query) {
-  const articles = getAgreementsArticles(agreementIdOrIdcc);
+export default async function findAgreementArticles(agreementIdOrIdcc, query) {
+  const articles = await getAgreementsArticles(agreementIdOrIdcc);
   const cleanedQuery = cleanQuery(query);
   const smartQuery = smartenArticleQuery(cleanedQuery);
 

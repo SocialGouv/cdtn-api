@@ -1,4 +1,7 @@
+import answerWithError from "../../helpers/answerWithError";
 import Index from "../Index";
+
+jest.mock("../../helpers/answerWithError");
 
 describe(`controllers/Index`, () => {
   const koaContextMock = {
@@ -8,7 +11,7 @@ describe(`controllers/Index`, () => {
   };
 
   beforeEach(() => {
-    koaContextMock.throw.mockReset();
+    answerWithError.mockReset();
   });
 
   describe(`#get()`, () => {
@@ -20,7 +23,7 @@ describe(`controllers/Index`, () => {
 
         Index.get(ctx);
 
-        expect(ctx.throw).not.toHaveBeenCalled();
+        expect(answerWithError).not.toHaveBeenCalled();
         expect(ctx.body).toMatchObject({
           basePath: expect.any(String),
           definitions: expect.any(Object),

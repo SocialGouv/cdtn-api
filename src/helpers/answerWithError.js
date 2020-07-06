@@ -1,17 +1,20 @@
 // @ts-check
 
-import log from "npmlog";
-
-log.enableColor();
+import log from "./log";
 
 /**
  * @param {string} path
  * @param {?} error
  * @param {import("koa").Context} ctx
+ * @param {number=} code
  */
-export default function answerWithError(path, error, ctx) {
-  if (error.code === undefined) {
-    error.code = 500;
+export default function answerWithError(path, error, ctx, code) {
+  if (typeof error.code !== "number") {
+    if (typeof code === "number") {
+      error.code = code;
+    } else {
+      error.code = 500;
+    }
   }
 
   const errorMessage =
@@ -31,5 +34,7 @@ export default function answerWithError(path, error, ctx) {
     body.message = "Bad Request";
   }
 
-  ctx.throw(error.code, JSON.stringify(body));
+  // ctx.set("Content-Type", "application/json; charset=utf-8");
+  ctx.status = error.code;
+  ctx.body = body;
 }

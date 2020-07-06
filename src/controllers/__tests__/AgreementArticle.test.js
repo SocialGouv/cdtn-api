@@ -1,19 +1,21 @@
+import answerWithError from "../../helpers/answerWithError";
 import AgreementArticle from "../AgreementArticle";
+
+jest.mock("../../helpers/answerWithError");
 
 describe(`controllers/AgreementArticle`, () => {
   const koaContextMock = {
     params: {},
     query: {},
-    throw: jest.fn(),
   };
 
   beforeEach(() => {
-    koaContextMock.throw.mockReset();
+    answerWithError.mockReset();
   });
 
   describe(`#get()`, () => {
     describe(`should fill body with the expected data`, () => {
-      it(`with an agreement article CID`, () => {
+      it(`with an agreement article CID`, async () => {
         const ctx = {
           ...koaContextMock,
           params: {
@@ -21,9 +23,9 @@ describe(`controllers/AgreementArticle`, () => {
           },
         };
 
-        AgreementArticle.get(ctx);
+        await AgreementArticle.get(ctx);
 
-        expect(ctx.throw).not.toHaveBeenCalled();
+        expect(answerWithError).not.toHaveBeenCalled();
         expect(ctx.body).toMatchObject({
           cid: expect.any(String),
           containerId: expect.any(String),
@@ -38,7 +40,7 @@ describe(`controllers/AgreementArticle`, () => {
 
   describe(`#index()`, () => {
     describe(`should fill body with the expected data`, () => {
-      it(`with an agreement ID`, () => {
+      it(`with an agreement ID`, async () => {
         const ctx = {
           ...koaContextMock,
           query: {
@@ -47,9 +49,9 @@ describe(`controllers/AgreementArticle`, () => {
           },
         };
 
-        AgreementArticle.index(ctx);
+        await AgreementArticle.index(ctx);
 
-        expect(ctx.throw).not.toHaveBeenCalled();
+        expect(answerWithError).not.toHaveBeenCalled();
         expect(ctx.body.length).toBeGreaterThanOrEqual(1);
         expect(ctx.body[0]).toMatchObject({
           cid: expect.any(String),
@@ -61,7 +63,7 @@ describe(`controllers/AgreementArticle`, () => {
         });
       });
 
-      it(`with an agreement IDCC`, () => {
+      it(`with an agreement IDCC`, async () => {
         const ctx = {
           ...koaContextMock,
           query: {
@@ -70,9 +72,9 @@ describe(`controllers/AgreementArticle`, () => {
           },
         };
 
-        AgreementArticle.index(ctx);
+        await AgreementArticle.index(ctx);
 
-        expect(ctx.throw).not.toHaveBeenCalled();
+        expect(answerWithError).not.toHaveBeenCalled();
         expect(ctx.body.length).toBeGreaterThanOrEqual(1);
         expect(ctx.body[0]).toMatchObject({
           cid: expect.any(String),
@@ -84,7 +86,7 @@ describe(`controllers/AgreementArticle`, () => {
         });
       });
 
-      it(`with a comma-separated list of article CIDs`, () => {
+      it(`with a comma-separated list of article CIDs`, async () => {
         const ctx = {
           ...koaContextMock,
           query: {
@@ -92,9 +94,9 @@ describe(`controllers/AgreementArticle`, () => {
           },
         };
 
-        AgreementArticle.index(ctx);
+        await AgreementArticle.index(ctx);
 
-        expect(ctx.throw).not.toHaveBeenCalled();
+        expect(answerWithError).not.toHaveBeenCalled();
         expect(ctx.body.length).toBe(2);
         expect(ctx.body).toMatchObject([
           {
@@ -118,18 +120,18 @@ describe(`controllers/AgreementArticle`, () => {
     });
 
     describe(`should throw`, () => {
-      it(`with an undefined <agreementIdOrIdcc> query AND an undefined <articleIdsOrCids>`, () => {
+      it(`with an undefined <agreementIdOrIdcc> query AND an undefined <articleIdsOrCids>`, async () => {
         const ctx = {
           ...koaContextMock,
         };
 
-        AgreementArticle.index(ctx);
+        await AgreementArticle.index(ctx);
 
-        expect(ctx.throw).toHaveBeenCalledTimes(1);
+        expect(answerWithError).toHaveBeenCalledTimes(1);
       });
 
       describe(`with an <agreementIdOrIdcc> query`, () => {
-        it(`but a non-string one`, () => {
+        it(`but a non-string one`, async () => {
           const ctx = {
             ...koaContextMock,
             query: {
@@ -138,12 +140,12 @@ describe(`controllers/AgreementArticle`, () => {
             },
           };
 
-          AgreementArticle.index(ctx);
+          await AgreementArticle.index(ctx);
 
-          expect(ctx.throw).toHaveBeenCalledTimes(1);
+          expect(answerWithError).toHaveBeenCalledTimes(1);
         });
 
-        it(`and an undefined <query> query`, () => {
+        it(`and an undefined <query> query`, async () => {
           const ctx = {
             ...koaContextMock,
             query: {
@@ -151,12 +153,12 @@ describe(`controllers/AgreementArticle`, () => {
             },
           };
 
-          AgreementArticle.index(ctx);
+          await AgreementArticle.index(ctx);
 
-          expect(ctx.throw).toHaveBeenCalledTimes(1);
+          expect(answerWithError).toHaveBeenCalledTimes(1);
         });
 
-        it(`and a non-string <query> query`, () => {
+        it(`and a non-string <query> query`, async () => {
           const ctx = {
             ...koaContextMock,
             query: {
@@ -165,14 +167,14 @@ describe(`controllers/AgreementArticle`, () => {
             },
           };
 
-          AgreementArticle.index(ctx);
+          await AgreementArticle.index(ctx);
 
-          expect(ctx.throw).toHaveBeenCalledTimes(1);
+          expect(answerWithError).toHaveBeenCalledTimes(1);
         });
       });
 
       describe(`with an <articleIdsOrCids> query`, () => {
-        it(`but a non-string one`, () => {
+        it(`but a non-string one`, async () => {
           const ctx = {
             ...koaContextMock,
             query: {
@@ -180,12 +182,12 @@ describe(`controllers/AgreementArticle`, () => {
             },
           };
 
-          AgreementArticle.index(ctx);
+          await AgreementArticle.index(ctx);
 
-          expect(ctx.throw).toHaveBeenCalledTimes(1);
+          expect(answerWithError).toHaveBeenCalledTimes(1);
         });
 
-        it(`but a malformed one`, () => {
+        it(`but a malformed one`, async () => {
           const ctx = {
             ...koaContextMock,
             query: {
@@ -193,9 +195,9 @@ describe(`controllers/AgreementArticle`, () => {
             },
           };
 
-          AgreementArticle.index(ctx);
+          await AgreementArticle.index(ctx);
 
-          expect(ctx.throw).toHaveBeenCalledTimes(1);
+          expect(answerWithError).toHaveBeenCalledTimes(1);
         });
       });
     });
