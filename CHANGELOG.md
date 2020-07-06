@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/SocialGouv/cdtn-api/compare/v1.4.2...v1.5.0) (2020-07-06)
+
+
+### Features
+
+* optimize agreements article path generation ([#25](https://github.com/SocialGouv/cdtn-api/issues/25)) ([8ce7f4b](https://github.com/SocialGouv/cdtn-api/commit/8ce7f4b3e066638e74c28b331b7d4f5a2ed4cf3f))
+
 ## [1.4.2](https://github.com/SocialGouv/cdtn-api/compare/v1.4.1...v1.4.2) (2020-07-06)
 
 
