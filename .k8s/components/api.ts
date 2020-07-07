@@ -10,10 +10,11 @@ const redisEnv: IIoK8sApiCoreV1EnvVar = {
   name: "REDIS_URL",
   value: "redis://redis:6379",
 };
+
+ok(process.env.CI_COMMIT_SHA, "Expect CI_COMMIT_SHA");
 const initContainer: IIoK8sApiCoreV1Container = {
   name: "init",
-  image:
-    "registry.gitlab.factory.social.gouv.fr/socialgouv/cdtn-api/init:0bb422da4337c84ed1b8cafb31cdc9609c7d0947",
+  image: `registry.gitlab.factory.social.gouv.fr/socialgouv/cdtn-api/init:${process.env.CI_COMMIT_SHA}`,
   resources: {
     requests: {
       cpu: "2000m",
@@ -26,8 +27,9 @@ const initContainer: IIoK8sApiCoreV1Container = {
   },
   env: [redisEnv],
 };
-ok(deployment.spec);
-ok(deployment.spec.template.spec);
+
+ok(deployment.spec, "Expect deployment.spec");
+ok(deployment.spec.template.spec, "Expect deployment.spec.template.spec");
 deployment.spec.template.spec.initContainers = [initContainer];
 deployment.spec.template.spec.containers[0].env = [redisEnv];
 export default [deployment, ingress, service];
