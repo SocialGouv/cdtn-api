@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/SocialGouv/cdtn-api/compare/v1.5.0...v1.5.1) (2020-07-07)
+
+
+### Bug Fixes
+
+* **ci:** remove custom yarn cache folder in docker image ([#32](https://github.com/SocialGouv/cdtn-api/issues/32)) ([ab50a77](https://github.com/SocialGouv/cdtn-api/commit/ab50a77489f03b3b5eefd58c8472e28d86f5a21a))
+
 # [1.5.0](https://github.com/SocialGouv/cdtn-api/compare/v1.4.2...v1.5.0) (2020-07-06)
 
 
