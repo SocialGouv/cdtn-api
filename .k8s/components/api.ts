@@ -2,9 +2,14 @@ import env from "@kosko/env";
 import { ok } from "assert";
 import { create } from "@socialgouv/kosko-charts/components/app";
 import { IIoK8sApiCoreV1Container } from "kubernetes-models/_definitions/IoK8sApiCoreV1Container";
+import { IIoK8sApiCoreV1EnvVar } from "kubernetes-models/_definitions/IoK8sApiCoreV1EnvVar";
 
 const { deployment, ingress, service } = create(env.component("api"));
 
+const redisEnv: IIoK8sApiCoreV1EnvVar = {
+  name: "REDIS_URL",
+  value: "redis://redis:6379",
+};
 const initContainer: IIoK8sApiCoreV1Container = {
   name: "init",
   image:
@@ -19,14 +24,10 @@ const initContainer: IIoK8sApiCoreV1Container = {
       memory: "2Gi",
     },
   },
-  env: [
-    {
-      name: "REDIS_URL",
-      value: "redis://redis",
-    },
-  ],
+  env: [redisEnv],
 };
 ok(deployment.spec);
 ok(deployment.spec.template.spec);
 deployment.spec.template.spec.initContainers = [initContainer];
+deployment.spec.template.spec.containers[0].env = [redisEnv];
 export default [deployment, ingress, service];

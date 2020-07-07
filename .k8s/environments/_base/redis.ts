@@ -32,10 +32,10 @@ const env = {
 
   limits: {
     cpu: "1000m",
-    memory: "512Mi",
+    memory: "1Gi",
   },
 
-  servicePort: 80,
+  servicePort: 6379,
 };
 
 export default env;
