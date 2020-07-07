@@ -37,4 +37,4 @@ deployment.spec.template.spec.containers[0] = merge(
   container,
 );
 
-export default [deployment, ingress, service];
+export default [deployment, service];
