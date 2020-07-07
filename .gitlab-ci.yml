@@ -35,3 +35,11 @@ Register image:
   variables:
     DOCKER_BUILD_ARGS: >-
       --shm-size 1g
+
+Register init image:
+  extends: .autodevops_register_image
+  variables:
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/init
+    DOCKER_BUILD_ARGS: >-
+      --file init.Dockerfile
+      --shm-size 1g
