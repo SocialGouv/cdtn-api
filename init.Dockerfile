@@ -1,10 +1,5 @@
 FROM node:12.16.3-alpine
 
-
-ARG REDIS_URL
-
-ENV REDIS_URL=$REDIS_URL
-
 RUN apk add --no-cache git
 
 WORKDIR /app
