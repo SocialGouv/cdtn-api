@@ -10,7 +10,7 @@
     },
     "contact": { "email": "dsi-incubateur@sg.social.gouv.fr" }
   },
-  "host": "cdtn-api.prod2.fabrique.social.gouv.fr",
+  "host": "cdtn-api.fabrique.social.gouv.fr",
   "basePath": "/",
   "tags": [
     { "name": "agreement", "description": "Labor Agreement" },
