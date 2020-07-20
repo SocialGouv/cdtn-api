@@ -1,3 +1,10 @@
+## [1.5.4](https://github.com/SocialGouv/cdtn-api/compare/v1.5.3...v1.5.4) (2020-07-20)
+
+
+### Bug Fixes
+
+* **k8s:** change dev request limit ([8843083](https://github.com/SocialGouv/cdtn-api/commit/8843083edb7f873cad1d1420731a60773594ffae))
+
 ## [1.5.3](https://github.com/SocialGouv/cdtn-api/compare/v1.5.2...v1.5.3) (2020-07-09)
 
 
