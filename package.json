@@ -37,16 +37,16 @@
     "unist-util-flat-filter": "1.0.0"
   },
   "devDependencies": {
-    "@babel/core": "7.10.4",
-    "@babel/plugin-transform-runtime": "7.10.4",
+    "@babel/core": "7.10.5",
+    "@babel/plugin-transform-runtime": "7.10.5",
     "@babel/polyfill": "7.10.4",
     "@babel/preset-env": "7.10.4",
     "@socialgouv/eslint-config-strict": "1.0.0-beta.5",
-    "@types/jest": "26.0.3",
+    "@types/jest": "26.0.7",
     "@types/koa": "2.11.3",
-    "@types/node": "14.0.14",
+    "@types/node": "14.0.25",
     "@types/npmlog": "4.1.2",
-    "@types/redis": "2.8.24",
+    "@types/redis": "2.8.25",
     "axios": "0.19.2",
     "babel-eslint": "10.1.0",
     "babel-jest": "26.1.0",
@@ -56,8 +56,8 @@
     "jest": "26.1.0",
     "nodemon": "2.0.4",
     "prettier": "2.0.5",
-    "swagger-cli": "4.0.3",
-    "typescript": "3.9.6",
+    "swagger-cli": "4.0.4",
+    "typescript": "3.9.7",
     "waait": "1.0.5"
   },
   "husky": {
