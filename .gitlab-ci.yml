@@ -19,27 +19,28 @@ variables:
   AUTO_DEVOPS_RELEASE_AUTO: "🔖"
   AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
 
-Install:
-  after_script:
-    # Removes ~400M
-    - yarn cache clean @socialgouv/kali-data
-    # Removes ~150M
-    - yarn cache clean @socialgouv/legi-data
+Lint:
+  rules:
+    - when: never
+
+Test:
+  rules:
+    - when: never
 
 Build:
-  script:
-    - echo "look ma, no build"
+  rules:
+    - when: never
 
 Register image:
   extends: .autodevops_register_image
   variables:
     DOCKER_BUILD_ARGS: >-
-      --shm-size 1g
+      --shm-size 512M
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
 
 Register init image:
   extends: .autodevops_register_image
   variables:
     IMAGE_NAME: $CI_REGISTRY_IMAGE/init
     DOCKER_BUILD_ARGS: >-
-      --file init.Dockerfile
-      --shm-size 1g
+      --file init.Dockerfile --shm-size 1g
