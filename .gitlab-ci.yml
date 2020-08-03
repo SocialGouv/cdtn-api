@@ -19,17 +19,16 @@ variables:
   AUTO_DEVOPS_RELEASE_AUTO: "🔖"
   AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
 
-Lint:
-  rules:
-    - when: never
-
-Test:
-  rules:
-    - when: never
+Install:
+  after_script:
+    # Removes ~400M
+    - yarn cache clean @socialgouv/kali-data
+    # Removes ~150M
+    - yarn cache clean @socialgouv/legi-data
 
 Build:
-  rules:
-    - when: never
+  script:
+    - echo "look ma, no build"
 
 Register image:
   extends: .autodevops_register_image
