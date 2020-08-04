@@ -11,7 +11,7 @@ import { addEnv } from "@socialgouv/kosko-charts/utils/addEnv";
 
 const redisEnv: IIoK8sApiCoreV1EnvVar = {
   name: "REDIS_URL",
-  value: "redis://redis:6379",
+  value: "redis://redis:80",
 };
 
 // create the main app container + service + ingress
