@@ -34,7 +34,7 @@ Register image:
   extends: .autodevops_register_image
   variables:
     DOCKER_BUILD_ARGS: >-
-      --shm-size 512M
+      --shm-size 1g
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
 
 Register init image:
