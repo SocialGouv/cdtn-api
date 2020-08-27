@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/SocialGouv/cdtn-api/compare/v1.5.4...v1.6.0) (2020-08-27)
+
+
+### Features
+
+* use kosko-charts:2.2.0 ([#42](https://github.com/SocialGouv/cdtn-api/issues/42)) ([07e13e2](https://github.com/SocialGouv/cdtn-api/commit/07e13e24413350c399cc4ad0fca671204aa2ab5e))
+
 ## [1.5.4](https://github.com/SocialGouv/cdtn-api/compare/v1.5.3...v1.5.4) (2020-07-20)
 
 
