@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/SocialGouv/cdtn-api/compare/v1.6.0...v1.6.1) (2020-08-28)
+
+
+### Bug Fixes
+
+* **k8s:** increase limits ([#44](https://github.com/SocialGouv/cdtn-api/issues/44)) ([8d80adb](https://github.com/SocialGouv/cdtn-api/commit/8d80adb2c78f7f378e0af91681749188a5b9ace8))
+
 # [1.6.0](https://github.com/SocialGouv/cdtn-api/compare/v1.5.4...v1.6.0) (2020-08-27)
 
 
