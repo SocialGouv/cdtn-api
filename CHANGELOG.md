@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/SocialGouv/cdtn-api/compare/v1.6.1...v1.6.2) (2020-10-22)
+
+
+### Bug Fixes
+
+* **k8s:** upgrade RAM limits ([#48](https://github.com/SocialGouv/cdtn-api/issues/48)) ([7262407](https://github.com/SocialGouv/cdtn-api/commit/7262407ebf00032923cdae69003be5c47992650d))
+
 ## [1.6.1](https://github.com/SocialGouv/cdtn-api/compare/v1.6.0...v1.6.1) (2020-08-28)
 
 
