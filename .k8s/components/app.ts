@@ -29,7 +29,7 @@ const manifests = create("app", {
         },
         limits: {
           cpu: "1000m",
-          memory: "256Mi",
+          memory: "768Mi",
         },
       },
     },
