@@ -1,3 +1,10 @@
+## [1.6.3](https://github.com/SocialGouv/cdtn-api/compare/v1.6.2...v1.6.3) (2020-10-22)
+
+
+### Bug Fixes
+
+* kosko preprod ([#49](https://github.com/SocialGouv/cdtn-api/issues/49)) ([619e22b](https://github.com/SocialGouv/cdtn-api/commit/619e22b400031203b22aae9de72fbc18c28e298c))
+
 ## [1.6.2](https://github.com/SocialGouv/cdtn-api/compare/v1.6.1...v1.6.2) (2020-10-22)
 
 
