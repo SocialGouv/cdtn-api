@@ -24,7 +24,7 @@
   "dependencies": {
     "@koa/cors": "3.1.0",
     "@koa/router": "9.0.1",
-    "@socialgouv/kali-data": "SocialGouv/kali-data#master",
+    "@socialgouv/kali-data": "2.11.0",
     "@socialgouv/legi-data": "1.22.0",
     "cross-env": "7.0.2",
     "dotenv": "8.2.0",
