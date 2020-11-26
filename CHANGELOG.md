@@ -1,3 +1,10 @@
+## [1.6.4](https://github.com/SocialGouv/cdtn-api/compare/v1.6.3...v1.6.4) (2020-11-26)
+
+
+### Bug Fixes
+
+* use @socialgouv/kali-data ([#54](https://github.com/SocialGouv/cdtn-api/issues/54)) ([967ef48](https://github.com/SocialGouv/cdtn-api/commit/967ef48f8a617af8eca4f091af7c582644d49c07)), closes [/github.com/SocialGouv/kali-data/commit/94a0767a8ad835a542a9aec93f0b86fabe32d0cb#diff-cf904c3b3dbb054d78c122ac10b09f0384c652a65a53a8542e90219dbbf9460](https://github.com//github.com/SocialGouv/kali-data/commit/94a0767a8ad835a542a9aec93f0b86fabe32d0cb/issues/diff-cf904c3b3dbb054d78c122ac10b09f0384c652a65a53a8542e90219dbbf9460)
+
 ## [1.6.3](https://github.com/SocialGouv/cdtn-api/compare/v1.6.2...v1.6.3) (2020-10-22)
 
 

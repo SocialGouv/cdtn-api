@@ -1,6 +1,6 @@
 {
   "name": "@socialgouv/cdtn-api",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "license": "Apache-2.0",
   "private": true,
   "scripts": {
