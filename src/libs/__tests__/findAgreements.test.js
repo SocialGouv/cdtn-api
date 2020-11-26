@@ -5,7 +5,7 @@ describe("libs/findAgreements()", () => {
     it(`with no <query>`, () => {
       const received = findAgreements();
 
-      expect(received).toHaveLength(385);
+      expect(received).toHaveLength(384);
       expect(received[0].id).toBe("KALICONT000038661444");
       expect(received[0].num).toBe(3230);
     });
