@@ -11,7 +11,7 @@
     "xxx": "DOTENV_CONFIG_PATH=./environments/.gitlab-ci.env npx ts-node --require dotenv/config ./main.js"
   },
   "dependencies": {
-    "@kosko/env": "^0.5.2",
+    "@kosko/env": "^1.0.1",
     "@socialgouv/kosko-charts": "^3.2.5",
     "kubernetes-models": "^0.8.1",
     "toml": "^3.0.0"
