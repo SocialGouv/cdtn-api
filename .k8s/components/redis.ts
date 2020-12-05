@@ -2,7 +2,7 @@ import env from "@kosko/env";
 
 import { create } from "@socialgouv/kosko-charts/components/redis";
 
-const manifests = create({
+const manifests = create("redis", {
   env,
   deployment: {
     container: {
