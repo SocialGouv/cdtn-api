@@ -5,36 +5,36 @@ exports[`kosko generate --preprod 1`] = `
 metadata:
   annotations:
     field.cattle.io/creatorId: gitlab
-    field.cattle.io/projectId: 'c-f8qps:p-46tj7'
-    git/branch: beta-db-12
+    field.cattle.io/projectId: ''
+    git/branch: v1.2.3
     git/remote: >-
-      https://gitlab-ci-token:[MASKED]@gitlab.factory.social.gouv.fr/SocialGouv/socialgouv-github-io.git
-    app.gitlab.com/app: socialgouv-cdtn-contrib-site
+      https://gitlab-ci-token:[MASKED]@gitlab.factory.social.gouv.fr/SocialGouv/cdtn-api.git
+    app.gitlab.com/app: socialgouv-cdtn-api
     app.gitlab.com/env: preprod-dev2
     app.gitlab.com/env.name: preprod-dev2
   labels:
-    azure-pg-admin-user: cdtn-contrib-site
-    application: v1-2-3-cdtn-contrib-site
-    owner: cdtn-contrib-site
-    team: cdtn-contrib-site
+    azure-pg-admin-user: cdtn-api
+    application: v1-2-3-cdtn-api
+    owner: cdtn-api
+    team: cdtn-api
     cert: wildcard
-  name: cdtn-contrib-site-24-preprod-dev2
+  name: cdtn-api-85-preprod-dev2
 apiVersion: v1
 kind: Namespace
 ---
 metadata:
   annotations:
-    app.gitlab.com/app: socialgouv-cdtn-contrib-site
+    app.gitlab.com/app: socialgouv-cdtn-api
     app.gitlab.com/env: preprod-dev2
     app.gitlab.com/env.name: preprod-dev2
   labels:
     app: app
-    application: v1-2-3-cdtn-contrib-site
-    owner: cdtn-contrib-site
-    team: cdtn-contrib-site
+    application: v1-2-3-cdtn-api
+    owner: cdtn-api
+    team: cdtn-api
     cert: wildcard
   name: app
-  namespace: cdtn-contrib-site-24-preprod-dev2
+  namespace: cdtn-api-85-preprod-dev2
 spec:
   replicas: 1
   selector:
@@ -43,19 +43,18 @@ spec:
   template:
     metadata:
       annotations:
-        app.gitlab.com/app: socialgouv-cdtn-contrib-site
+        app.gitlab.com/app: socialgouv-cdtn-api
         app.gitlab.com/env: preprod-dev2
         app.gitlab.com/env.name: preprod-dev2
       labels:
         app: app
-        application: v1-2-3-cdtn-contrib-site
-        owner: cdtn-contrib-site
-        team: cdtn-contrib-site
+        application: v1-2-3-cdtn-api
+        owner: cdtn-api
+        team: cdtn-api
         cert: wildcard
     spec:
       containers:
-        - image: >-
-            registry.gitlab.factory.social.gouv.fr/socialgouv/cdtn-contrib-site/app:1.2.3
+        - image: 'registry.gitlab.factory.social.gouv.fr/socialgouv/cdtn-api/app:1.2.3'
           livenessProbe:
             failureThreshold: 6
             httpGet:
@@ -96,7 +95,7 @@ spec:
       initContainers:
         - name: init
           image: >-
-            registry.gitlab.factory.social.gouv.fr/socialgouv/cdtn-contrib-site/init:c58c0974f7023063b1296d3a5a285b46b92771f8
+            registry.gitlab.factory.social.gouv.fr/socialgouv/cdtn-api/init:0123456789abcdefghijklmnopqrstuvwxyz0123
           imagePullPolicy: Always
           resources:
             requests:
@@ -114,16 +113,16 @@ kind: Deployment
 metadata:
   labels:
     app: app
-    application: v1-2-3-cdtn-contrib-site
-    owner: cdtn-contrib-site
-    team: cdtn-contrib-site
+    application: v1-2-3-cdtn-api
+    owner: cdtn-api
+    team: cdtn-api
     cert: wildcard
   name: app
   annotations:
-    app.gitlab.com/app: socialgouv-cdtn-contrib-site
+    app.gitlab.com/app: socialgouv-cdtn-api
     app.gitlab.com/env: preprod-dev2
     app.gitlab.com/env.name: preprod-dev2
-  namespace: cdtn-contrib-site-24-preprod-dev2
+  namespace: cdtn-api-85-preprod-dev2
 spec:
   ports:
     - name: http
@@ -138,20 +137,20 @@ kind: Service
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-    app.gitlab.com/app: socialgouv-cdtn-contrib-site
+    app.gitlab.com/app: socialgouv-cdtn-api
     app.gitlab.com/env: preprod-dev2
     app.gitlab.com/env.name: preprod-dev2
   labels:
     app: app
-    application: v1-2-3-cdtn-contrib-site
-    owner: cdtn-contrib-site
-    team: cdtn-contrib-site
+    application: v1-2-3-cdtn-api
+    owner: cdtn-api
+    team: cdtn-api
     cert: wildcard
   name: app
-  namespace: cdtn-contrib-site-24-preprod-dev2
+  namespace: cdtn-api-85-preprod-dev2
 spec:
   rules:
-    - host: preprod-cdtn-contrib-site.dev2.fabrique.social.gouv.fr
+    - host: preprod-cdtn-api.dev2.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -160,25 +159,25 @@ spec:
             path: /
   tls:
     - hosts:
-        - preprod-cdtn-contrib-site.dev2.fabrique.social.gouv.fr
+        - preprod-cdtn-api.dev2.fabrique.social.gouv.fr
       secretName: wildcard-crt
 apiVersion: extensions/v1beta1
 kind: Ingress
 ---
 metadata:
   annotations:
-    app.gitlab.com/app: socialgouv-cdtn-contrib-site
+    app.gitlab.com/app: socialgouv-cdtn-api
     app.gitlab.com/env: preprod-dev2
     app.gitlab.com/env.name: preprod-dev2
   labels:
     app: redis
-    application: v1-2-3-cdtn-contrib-site
-    owner: cdtn-contrib-site
-    team: cdtn-contrib-site
+    application: v1-2-3-cdtn-api
+    owner: cdtn-api
+    team: cdtn-api
     cert: wildcard
     component: redis
   name: redis
-  namespace: cdtn-contrib-site-24-preprod-dev2
+  namespace: cdtn-api-85-preprod-dev2
 spec:
   replicas: 1
   selector:
@@ -187,14 +186,14 @@ spec:
   template:
     metadata:
       annotations:
-        app.gitlab.com/app: socialgouv-cdtn-contrib-site
+        app.gitlab.com/app: socialgouv-cdtn-api
         app.gitlab.com/env: preprod-dev2
         app.gitlab.com/env.name: preprod-dev2
       labels:
         app: redis
-        application: v1-2-3-cdtn-contrib-site
-        owner: cdtn-contrib-site
-        team: cdtn-contrib-site
+        application: v1-2-3-cdtn-api
+        owner: cdtn-api
+        team: cdtn-api
         cert: wildcard
         component: redis
     spec:
@@ -246,16 +245,16 @@ kind: Deployment
 metadata:
   labels:
     app: redis
-    application: v1-2-3-cdtn-contrib-site
-    owner: cdtn-contrib-site
-    team: cdtn-contrib-site
+    application: v1-2-3-cdtn-api
+    owner: cdtn-api
+    team: cdtn-api
     cert: wildcard
   name: redis
   annotations:
-    app.gitlab.com/app: socialgouv-cdtn-contrib-site
+    app.gitlab.com/app: socialgouv-cdtn-api
     app.gitlab.com/env: preprod-dev2
     app.gitlab.com/env.name: preprod-dev2
-  namespace: cdtn-contrib-site-24-preprod-dev2
+  namespace: cdtn-api-85-preprod-dev2
 spec:
   ports:
     - name: http

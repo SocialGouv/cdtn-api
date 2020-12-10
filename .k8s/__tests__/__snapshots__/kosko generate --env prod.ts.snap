@@ -4,16 +4,16 @@ exports[`kosko generate --prod 1`] = `
 "---
 metadata:
   annotations:
-    app.gitlab.com/app: socialgouv-cdtn-contrib-site
+    app.gitlab.com/app: socialgouv-cdtn-api
     app.gitlab.com/env: prod2
     app.gitlab.com/env.name: prod2
   labels:
     app: app
-    application: cdtn-contrib-site
-    owner: cdtn-contrib-site
-    team: cdtn-contrib-site
+    application: cdtn-api
+    owner: cdtn-api
+    team: cdtn-api
   name: app
-  namespace: cdtn-contrib-site
+  namespace: cdtn-api
 spec:
   replicas: 1
   selector:
@@ -22,18 +22,17 @@ spec:
   template:
     metadata:
       annotations:
-        app.gitlab.com/app: socialgouv-cdtn-contrib-site
+        app.gitlab.com/app: socialgouv-cdtn-api
         app.gitlab.com/env: prod2
         app.gitlab.com/env.name: prod2
       labels:
         app: app
-        application: cdtn-contrib-site
-        owner: cdtn-contrib-site
-        team: cdtn-contrib-site
+        application: cdtn-api
+        owner: cdtn-api
+        team: cdtn-api
     spec:
       containers:
-        - image: >-
-            registry.gitlab.factory.social.gouv.fr/socialgouv/cdtn-contrib-site/app:1.2.3
+        - image: 'registry.gitlab.factory.social.gouv.fr/socialgouv/cdtn-api/app:1.2.3'
           livenessProbe:
             failureThreshold: 6
             httpGet:
@@ -74,7 +73,7 @@ spec:
       initContainers:
         - name: init
           image: >-
-            registry.gitlab.factory.social.gouv.fr/socialgouv/cdtn-contrib-site/init:c58c0974f7023063b1296d3a5a285b46b92771f8
+            registry.gitlab.factory.social.gouv.fr/socialgouv/cdtn-api/init:0123456789abcdefghijklmnopqrstuvwxyz0123
           imagePullPolicy: Always
           resources:
             requests:
@@ -92,15 +91,15 @@ kind: Deployment
 metadata:
   labels:
     app: app
-    application: cdtn-contrib-site
-    owner: cdtn-contrib-site
-    team: cdtn-contrib-site
+    application: cdtn-api
+    owner: cdtn-api
+    team: cdtn-api
   name: app
   annotations:
-    app.gitlab.com/app: socialgouv-cdtn-contrib-site
+    app.gitlab.com/app: socialgouv-cdtn-api
     app.gitlab.com/env: prod2
     app.gitlab.com/env.name: prod2
-  namespace: cdtn-contrib-site
+  namespace: cdtn-api
 spec:
   ports:
     - name: http
@@ -117,19 +116,19 @@ metadata:
     kubernetes.io/ingress.class: nginx
     certmanager.k8s.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
-    app.gitlab.com/app: socialgouv-cdtn-contrib-site
+    app.gitlab.com/app: socialgouv-cdtn-api
     app.gitlab.com/env: prod2
     app.gitlab.com/env.name: prod2
   labels:
     app: app
-    application: cdtn-contrib-site
-    owner: cdtn-contrib-site
-    team: cdtn-contrib-site
+    application: cdtn-api
+    owner: cdtn-api
+    team: cdtn-api
   name: app
-  namespace: cdtn-contrib-site
+  namespace: cdtn-api
 spec:
   rules:
-    - host: cdtn-contrib-site.fabrique.social.gouv.fr
+    - host: cdtn-api.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -138,24 +137,24 @@ spec:
             path: /
   tls:
     - hosts:
-        - cdtn-contrib-site.fabrique.social.gouv.fr
+        - cdtn-api.fabrique.social.gouv.fr
       secretName: app-crt
 apiVersion: extensions/v1beta1
 kind: Ingress
 ---
 metadata:
   annotations:
-    app.gitlab.com/app: socialgouv-cdtn-contrib-site
+    app.gitlab.com/app: socialgouv-cdtn-api
     app.gitlab.com/env: prod2
     app.gitlab.com/env.name: prod2
   labels:
     app: redis
-    application: cdtn-contrib-site
-    owner: cdtn-contrib-site
-    team: cdtn-contrib-site
+    application: cdtn-api
+    owner: cdtn-api
+    team: cdtn-api
     component: redis
   name: redis
-  namespace: cdtn-contrib-site
+  namespace: cdtn-api
 spec:
   replicas: 1
   selector:
@@ -164,14 +163,14 @@ spec:
   template:
     metadata:
       annotations:
-        app.gitlab.com/app: socialgouv-cdtn-contrib-site
+        app.gitlab.com/app: socialgouv-cdtn-api
         app.gitlab.com/env: prod2
         app.gitlab.com/env.name: prod2
       labels:
         app: redis
-        application: cdtn-contrib-site
-        owner: cdtn-contrib-site
-        team: cdtn-contrib-site
+        application: cdtn-api
+        owner: cdtn-api
+        team: cdtn-api
         component: redis
     spec:
       containers:
@@ -222,15 +221,15 @@ kind: Deployment
 metadata:
   labels:
     app: redis
-    application: cdtn-contrib-site
-    owner: cdtn-contrib-site
-    team: cdtn-contrib-site
+    application: cdtn-api
+    owner: cdtn-api
+    team: cdtn-api
   name: redis
   annotations:
-    app.gitlab.com/app: socialgouv-cdtn-contrib-site
+    app.gitlab.com/app: socialgouv-cdtn-api
     app.gitlab.com/env: prod2
     app.gitlab.com/env.name: prod2
-  namespace: cdtn-contrib-site
+  namespace: cdtn-api
 spec:
   ports:
     - name: http
