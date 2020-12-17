@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/SocialGouv/cdtn-api/compare/v1.6.4...v1.7.0) (2020-12-17)
+
+
+### Features
+
+* upgrade CI deps ([#60](https://github.com/SocialGouv/cdtn-api/issues/60)) ([7a3428c](https://github.com/SocialGouv/cdtn-api/commit/7a3428c9150b4fea9c70a9e896059bd5c672ea41))
+
 ## [1.6.4](https://github.com/SocialGouv/cdtn-api/compare/v1.6.3...v1.6.4) (2020-11-26)
 
 
