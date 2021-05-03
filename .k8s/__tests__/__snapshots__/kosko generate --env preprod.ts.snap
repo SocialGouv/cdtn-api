@@ -24,6 +24,8 @@ kind: Namespace
 ---
 metadata:
   annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-cdtn-api
     app.gitlab.com/env: preprod-dev2
     app.gitlab.com/env.name: preprod-dev2
@@ -43,6 +45,8 @@ spec:
   template:
     metadata:
       annotations:
+        kapp.k14s.io/disable-default-ownership-label-rules: ''
+        kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-cdtn-api
         app.gitlab.com/env: preprod-dev2
         app.gitlab.com/env.name: preprod-dev2
@@ -54,7 +58,7 @@ spec:
         cert: wildcard
     spec:
       containers:
-        - image: 'registry.gitlab.factory.social.gouv.fr/socialgouv/cdtn-api/app:1.2.3'
+        - image: 'harbor.fabrique.social.gouv.fr/cdtn/cdtn-api-app:1.2.3'
           livenessProbe:
             failureThreshold: 6
             httpGet:
@@ -94,8 +98,7 @@ spec:
               value: 'redis://redis:80'
       initContainers:
         - name: init
-          image: >-
-            registry.gitlab.factory.social.gouv.fr/socialgouv/cdtn-api/init:0123456789abcdefghijklmnopqrstuvwxyz0123
+          image: 'harbor.fabrique.social.gouv.fr/cdtn/cdtn-api-init:1.2.3'
           imagePullPolicy: Always
           resources:
             requests:
@@ -119,6 +122,8 @@ metadata:
     cert: wildcard
   name: app
   annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-cdtn-api
     app.gitlab.com/env: preprod-dev2
     app.gitlab.com/env.name: preprod-dev2
@@ -137,6 +142,8 @@ kind: Service
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-cdtn-api
     app.gitlab.com/env: preprod-dev2
     app.gitlab.com/env.name: preprod-dev2
@@ -166,6 +173,8 @@ kind: Ingress
 ---
 metadata:
   annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-cdtn-api
     app.gitlab.com/env: preprod-dev2
     app.gitlab.com/env.name: preprod-dev2
@@ -186,6 +195,8 @@ spec:
   template:
     metadata:
       annotations:
+        kapp.k14s.io/disable-default-ownership-label-rules: ''
+        kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-cdtn-api
         app.gitlab.com/env: preprod-dev2
         app.gitlab.com/env.name: preprod-dev2
@@ -198,7 +209,7 @@ spec:
         component: redis
     spec:
       containers:
-        - image: 'redis:6.0.5-alpine3.12'
+        - image: 'redis:6.2.0-alpine3.12'
           livenessProbe:
             failureThreshold: 6
             initialDelaySeconds: 30
@@ -251,6 +262,8 @@ metadata:
     cert: wildcard
   name: redis
   annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-cdtn-api
     app.gitlab.com/env: preprod-dev2
     app.gitlab.com/env.name: preprod-dev2
