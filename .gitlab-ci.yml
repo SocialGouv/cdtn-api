@@ -16,6 +16,7 @@ workflow:
 #
 
 variables:
+  AUTO_DEVOPS_KANIKO: "🏇"
   AUTO_DEVOPS_RELEASE_AUTO: "🔖"
   AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
 
@@ -30,7 +31,7 @@ Build:
   script:
     - echo "look ma, no build"
 
-Register image:
+Register Kaniko image:
   extends: .autodevops_register_kaniko_image
   variables:
     IMAGE_NAME: cdtn-api-app
