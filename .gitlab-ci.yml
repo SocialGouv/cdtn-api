@@ -16,6 +16,7 @@ workflow:
 #
 
 variables:
+  AUTO_DEVOPS_KANIKO: "🏇"
   AUTO_DEVOPS_RELEASE_AUTO: "🔖"
   AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
 
@@ -30,16 +31,14 @@ Build:
   script:
     - echo "look ma, no build"
 
-Register image:
-  extends: .autodevops_register_image
+Register Kaniko image:
+  extends: .autodevops_register_kaniko_image
   variables:
-    DOCKER_BUILD_ARGS: >-
-      --shm-size 1g
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+    IMAGE_NAME: cdtn-api-app
 
 Register init image:
-  extends: .autodevops_register_image
+  extends: .autodevops_register_kaniko_image
   variables:
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/init
+    IMAGE_NAME: cdtn-api-init
     DOCKER_BUILD_ARGS: >-
-      --file init.Dockerfile --shm-size 1g
+      --dockerfile init.Dockerfile

@@ -7,6 +7,7 @@ import { IIoK8sApiCoreV1EnvVar } from "kubernetes-models/_definitions/IoK8sApiCo
 
 import { create } from "@socialgouv/kosko-charts/components/app";
 import { addInitContainer } from "@socialgouv/kosko-charts/utils/addInitContainer";
+import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImagePath";
 import { addEnv } from "@socialgouv/kosko-charts/utils/addEnv";
 
 const redisEnv: IIoK8sApiCoreV1EnvVar = {
@@ -18,6 +19,7 @@ const redisEnv: IIoK8sApiCoreV1EnvVar = {
 const manifests = create("app", {
   env,
   config: {
+    image: getHarborImagePath({ name: "cdtn-api-app" }),
     containerPort: 3000,
   },
   deployment: {
@@ -39,7 +41,7 @@ const manifests = create("app", {
 // create an initContainre to feed REDIS
 const initContainer = new Container({
   name: "init",
-  image: `${process.env.CI_REGISTRY_IMAGE}/init:${process.env.CI_COMMIT_SHA}`,
+  image: getHarborImagePath({ name: "cdtn-api-init" }),
   imagePullPolicy: "Always",
   resources: {
     requests: {

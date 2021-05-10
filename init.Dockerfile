@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY package.json yarn.lock /app/
 
-RUN yarn --frozen-lockfile --cache-folder /dev/shm/yarn
+RUN yarn --frozen-lockfile
 
 COPY scripts /app/scripts
 COPY src /app/src
