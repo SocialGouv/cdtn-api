@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/SocialGouv/cdtn-api/compare/v1.7.0...v1.8.0) (2021-05-10)
+
+
+### Features
+
+* **ci:** kaniko+harbor ([#67](https://github.com/SocialGouv/cdtn-api/issues/67)) ([7a0ae2c](https://github.com/SocialGouv/cdtn-api/commit/7a0ae2c81154ec95182520f6db78b9f2991596a8))
+
 # [1.7.0](https://github.com/SocialGouv/cdtn-api/compare/v1.6.4...v1.7.0) (2020-12-17)
 
 
