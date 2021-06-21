@@ -1,9 +1,9 @@
 {
   "dependencies": {
     "@kosko/env": "^2.0.1",
-    "@socialgouv/kosko-charts": "^6.1.6",
+    "@socialgouv/kosko-charts": "^6.1.8",
     "@types/node": "^13.13.4",
-    "kosko": "^1.0.1",
+    "kosko": "^1.1.5",
     "kubernetes-models": "^1.0.1",
     "ts-node": "^9.0.0"
   },

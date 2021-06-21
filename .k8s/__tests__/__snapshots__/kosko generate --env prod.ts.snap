@@ -7,8 +7,8 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-cdtn-api
-    app.gitlab.com/env: prod2
-    app.gitlab.com/env.name: prod2
+    app.gitlab.com/env: prod
+    app.gitlab.com/env.name: prod
   labels:
     app: app
     application: cdtn-api
@@ -27,8 +27,8 @@ spec:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-cdtn-api
-        app.gitlab.com/env: prod2
-        app.gitlab.com/env.name: prod2
+        app.gitlab.com/env: prod
+        app.gitlab.com/env.name: prod
       labels:
         app: app
         application: cdtn-api
@@ -36,7 +36,7 @@ spec:
         team: cdtn-api
     spec:
       containers:
-        - image: 'harbor.fabrique.social.gouv.fr/cdtn/cdtn-api-app:1.2.3'
+        - image: harbor.fabrique.social.gouv.fr/cdtn/cdtn-api-app:1.2.3
           livenessProbe:
             failureThreshold: 6
             httpGet:
@@ -73,10 +73,10 @@ spec:
             periodSeconds: 5
           env:
             - name: REDIS_URL
-              value: 'redis://redis:80'
+              value: redis://redis:80
       initContainers:
         - name: init
-          image: 'harbor.fabrique.social.gouv.fr/cdtn/cdtn-api-init:1.2.3'
+          image: harbor.fabrique.social.gouv.fr/cdtn/cdtn-api-init:1.2.3
           imagePullPolicy: Always
           resources:
             requests:
@@ -87,7 +87,7 @@ spec:
               memory: 2Gi
           env:
             - name: REDIS_URL
-              value: 'redis://redis:80'
+              value: redis://redis:80
 apiVersion: apps/v1
 kind: Deployment
 ---
@@ -102,8 +102,8 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-cdtn-api
-    app.gitlab.com/env: prod2
-    app.gitlab.com/env.name: prod2
+    app.gitlab.com/env: prod
+    app.gitlab.com/env.name: prod
   namespace: cdtn-api
 spec:
   ports:
@@ -124,8 +124,8 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-cdtn-api
-    app.gitlab.com/env: prod2
-    app.gitlab.com/env.name: prod2
+    app.gitlab.com/env: prod
+    app.gitlab.com/env.name: prod
   labels:
     app: app
     application: cdtn-api
@@ -154,8 +154,8 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-cdtn-api
-    app.gitlab.com/env: prod2
-    app.gitlab.com/env.name: prod2
+    app.gitlab.com/env: prod
+    app.gitlab.com/env.name: prod
   labels:
     app: redis
     application: cdtn-api
@@ -175,8 +175,8 @@ spec:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-cdtn-api
-        app.gitlab.com/env: prod2
-        app.gitlab.com/env.name: prod2
+        app.gitlab.com/env: prod
+        app.gitlab.com/env.name: prod
       labels:
         app: redis
         application: cdtn-api
@@ -185,7 +185,7 @@ spec:
         component: redis
     spec:
       containers:
-        - image: 'redis:6.2.3-alpine3.13'
+        - image: redis:6.2.3-alpine3.13
           livenessProbe:
             failureThreshold: 6
             initialDelaySeconds: 30
@@ -240,8 +240,8 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-cdtn-api
-    app.gitlab.com/env: prod2
-    app.gitlab.com/env.name: prod2
+    app.gitlab.com/env: prod
+    app.gitlab.com/env.name: prod
   namespace: cdtn-api
 spec:
   ports:
