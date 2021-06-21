@@ -10,15 +10,15 @@ metadata:
     git/remote: >-
       https://gitlab-ci-token:[MASKED]@gitlab.factory.social.gouv.fr/SocialGouv/cdtn-api.git
     app.gitlab.com/app: socialgouv-cdtn-api
-    app.gitlab.com/env: preprod-dev2
-    app.gitlab.com/env.name: preprod-dev2
+    app.gitlab.com/env: preprod-dev42
+    app.gitlab.com/env.name: preprod-dev42
   labels:
     azure-pg-admin-user: cdtn-api
     application: v1-2-3-cdtn-api
     owner: cdtn-api
     team: cdtn-api
     cert: wildcard
-  name: cdtn-api-85-preprod-dev2
+  name: cdtn-api-85-preprod-dev42
 apiVersion: v1
 kind: Namespace
 ---
@@ -27,8 +27,8 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-cdtn-api
-    app.gitlab.com/env: preprod-dev2
-    app.gitlab.com/env.name: preprod-dev2
+    app.gitlab.com/env: preprod-dev42
+    app.gitlab.com/env.name: preprod-dev42
   labels:
     app: app
     application: v1-2-3-cdtn-api
@@ -36,7 +36,7 @@ metadata:
     team: cdtn-api
     cert: wildcard
   name: app
-  namespace: cdtn-api-85-preprod-dev2
+  namespace: cdtn-api-85-preprod-dev42
 spec:
   replicas: 1
   selector:
@@ -48,8 +48,8 @@ spec:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-cdtn-api
-        app.gitlab.com/env: preprod-dev2
-        app.gitlab.com/env.name: preprod-dev2
+        app.gitlab.com/env: preprod-dev42
+        app.gitlab.com/env.name: preprod-dev42
       labels:
         app: app
         application: v1-2-3-cdtn-api
@@ -58,7 +58,7 @@ spec:
         cert: wildcard
     spec:
       containers:
-        - image: 'harbor.fabrique.social.gouv.fr/cdtn/cdtn-api-app:1.2.3'
+        - image: harbor.fabrique.social.gouv.fr/cdtn/cdtn-api-app:1.2.3
           livenessProbe:
             failureThreshold: 6
             httpGet:
@@ -95,10 +95,10 @@ spec:
             periodSeconds: 5
           env:
             - name: REDIS_URL
-              value: 'redis://redis:80'
+              value: redis://redis:80
       initContainers:
         - name: init
-          image: 'harbor.fabrique.social.gouv.fr/cdtn/cdtn-api-init:1.2.3'
+          image: harbor.fabrique.social.gouv.fr/cdtn/cdtn-api-init:1.2.3
           imagePullPolicy: Always
           resources:
             requests:
@@ -109,7 +109,7 @@ spec:
               memory: 2Gi
           env:
             - name: REDIS_URL
-              value: 'redis://redis:80'
+              value: redis://redis:80
 apiVersion: apps/v1
 kind: Deployment
 ---
@@ -125,9 +125,9 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-cdtn-api
-    app.gitlab.com/env: preprod-dev2
-    app.gitlab.com/env.name: preprod-dev2
-  namespace: cdtn-api-85-preprod-dev2
+    app.gitlab.com/env: preprod-dev42
+    app.gitlab.com/env.name: preprod-dev42
+  namespace: cdtn-api-85-preprod-dev42
 spec:
   ports:
     - name: http
@@ -145,8 +145,8 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-cdtn-api
-    app.gitlab.com/env: preprod-dev2
-    app.gitlab.com/env.name: preprod-dev2
+    app.gitlab.com/env: preprod-dev42
+    app.gitlab.com/env.name: preprod-dev42
   labels:
     app: app
     application: v1-2-3-cdtn-api
@@ -154,10 +154,10 @@ metadata:
     team: cdtn-api
     cert: wildcard
   name: app
-  namespace: cdtn-api-85-preprod-dev2
+  namespace: cdtn-api-85-preprod-dev42
 spec:
   rules:
-    - host: preprod-cdtn-api.dev2.fabrique.social.gouv.fr
+    - host: preprod-cdtn-api.dev42.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -166,7 +166,7 @@ spec:
             path: /
   tls:
     - hosts:
-        - preprod-cdtn-api.dev2.fabrique.social.gouv.fr
+        - preprod-cdtn-api.dev42.fabrique.social.gouv.fr
       secretName: wildcard-crt
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -176,8 +176,8 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-cdtn-api
-    app.gitlab.com/env: preprod-dev2
-    app.gitlab.com/env.name: preprod-dev2
+    app.gitlab.com/env: preprod-dev42
+    app.gitlab.com/env.name: preprod-dev42
   labels:
     app: redis
     application: v1-2-3-cdtn-api
@@ -186,7 +186,7 @@ metadata:
     cert: wildcard
     component: redis
   name: redis
-  namespace: cdtn-api-85-preprod-dev2
+  namespace: cdtn-api-85-preprod-dev42
 spec:
   replicas: 1
   selector:
@@ -198,8 +198,8 @@ spec:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-cdtn-api
-        app.gitlab.com/env: preprod-dev2
-        app.gitlab.com/env.name: preprod-dev2
+        app.gitlab.com/env: preprod-dev42
+        app.gitlab.com/env.name: preprod-dev42
       labels:
         app: redis
         application: v1-2-3-cdtn-api
@@ -209,7 +209,7 @@ spec:
         component: redis
     spec:
       containers:
-        - image: 'redis:6.2.3-alpine3.13'
+        - image: redis:6.2.3-alpine3.13
           livenessProbe:
             failureThreshold: 6
             initialDelaySeconds: 30
@@ -265,9 +265,9 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-cdtn-api
-    app.gitlab.com/env: preprod-dev2
-    app.gitlab.com/env.name: preprod-dev2
-  namespace: cdtn-api-85-preprod-dev2
+    app.gitlab.com/env: preprod-dev42
+    app.gitlab.com/env.name: preprod-dev42
+  namespace: cdtn-api-85-preprod-dev42
 spec:
   ports:
     - name: http

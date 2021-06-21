@@ -10,15 +10,15 @@ metadata:
     git/remote: >-
       https://gitlab-ci-token:[MASKED]@gitlab.factory.social.gouv.fr/SocialGouv/cdtn-api.git
     app.gitlab.com/app: socialgouv-cdtn-api
-    app.gitlab.com/env: master-dev2
-    app.gitlab.com/env.name: master-dev2
+    app.gitlab.com/env: master-dev42
+    app.gitlab.com/env.name: master-dev42
   labels:
     azure-pg-admin-user: cdtn-api
-    application: master-dev2-cdtn-api
+    application: master-dev42-cdtn-api
     owner: cdtn-api
     team: cdtn-api
     cert: wildcard
-  name: cdtn-api-85-master-dev2
+  name: cdtn-api-85-master-dev42
 apiVersion: v1
 kind: Namespace
 ---
@@ -27,16 +27,16 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-cdtn-api
-    app.gitlab.com/env: master-dev2
-    app.gitlab.com/env.name: master-dev2
+    app.gitlab.com/env: master-dev42
+    app.gitlab.com/env.name: master-dev42
   labels:
     app: app
-    application: master-dev2-cdtn-api
+    application: master-dev42-cdtn-api
     owner: cdtn-api
     team: cdtn-api
     cert: wildcard
   name: app
-  namespace: cdtn-api-85-master-dev2
+  namespace: cdtn-api-85-master-dev42
 spec:
   replicas: 1
   selector:
@@ -48,11 +48,11 @@ spec:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-cdtn-api
-        app.gitlab.com/env: master-dev2
-        app.gitlab.com/env.name: master-dev2
+        app.gitlab.com/env: master-dev42
+        app.gitlab.com/env.name: master-dev42
       labels:
         app: app
-        application: master-dev2-cdtn-api
+        application: master-dev42-cdtn-api
         owner: cdtn-api
         team: cdtn-api
         cert: wildcard
@@ -96,7 +96,7 @@ spec:
             periodSeconds: 5
           env:
             - name: REDIS_URL
-              value: 'redis://redis:80'
+              value: redis://redis:80
       initContainers:
         - name: init
           image: >-
@@ -111,14 +111,14 @@ spec:
               memory: 2Gi
           env:
             - name: REDIS_URL
-              value: 'redis://redis:80'
+              value: redis://redis:80
 apiVersion: apps/v1
 kind: Deployment
 ---
 metadata:
   labels:
     app: app
-    application: master-dev2-cdtn-api
+    application: master-dev42-cdtn-api
     owner: cdtn-api
     team: cdtn-api
     cert: wildcard
@@ -127,9 +127,9 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-cdtn-api
-    app.gitlab.com/env: master-dev2
-    app.gitlab.com/env.name: master-dev2
-  namespace: cdtn-api-85-master-dev2
+    app.gitlab.com/env: master-dev42
+    app.gitlab.com/env.name: master-dev42
+  namespace: cdtn-api-85-master-dev42
 spec:
   ports:
     - name: http
@@ -147,19 +147,19 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-cdtn-api
-    app.gitlab.com/env: master-dev2
-    app.gitlab.com/env.name: master-dev2
+    app.gitlab.com/env: master-dev42
+    app.gitlab.com/env.name: master-dev42
   labels:
     app: app
-    application: master-dev2-cdtn-api
+    application: master-dev42-cdtn-api
     owner: cdtn-api
     team: cdtn-api
     cert: wildcard
   name: app
-  namespace: cdtn-api-85-master-dev2
+  namespace: cdtn-api-85-master-dev42
 spec:
   rules:
-    - host: master-dev2-cdtn-api.dev2.fabrique.social.gouv.fr
+    - host: master-dev42-cdtn-api.dev42.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -168,7 +168,7 @@ spec:
             path: /
   tls:
     - hosts:
-        - master-dev2-cdtn-api.dev2.fabrique.social.gouv.fr
+        - master-dev42-cdtn-api.dev42.fabrique.social.gouv.fr
       secretName: wildcard-crt
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -178,17 +178,17 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-cdtn-api
-    app.gitlab.com/env: master-dev2
-    app.gitlab.com/env.name: master-dev2
+    app.gitlab.com/env: master-dev42
+    app.gitlab.com/env.name: master-dev42
   labels:
     app: redis
-    application: master-dev2-cdtn-api
+    application: master-dev42-cdtn-api
     owner: cdtn-api
     team: cdtn-api
     cert: wildcard
     component: redis
   name: redis
-  namespace: cdtn-api-85-master-dev2
+  namespace: cdtn-api-85-master-dev42
 spec:
   replicas: 1
   selector:
@@ -200,18 +200,18 @@ spec:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-cdtn-api
-        app.gitlab.com/env: master-dev2
-        app.gitlab.com/env.name: master-dev2
+        app.gitlab.com/env: master-dev42
+        app.gitlab.com/env.name: master-dev42
       labels:
         app: redis
-        application: master-dev2-cdtn-api
+        application: master-dev42-cdtn-api
         owner: cdtn-api
         team: cdtn-api
         cert: wildcard
         component: redis
     spec:
       containers:
-        - image: 'redis:6.2.3-alpine3.13'
+        - image: redis:6.2.3-alpine3.13
           livenessProbe:
             failureThreshold: 6
             initialDelaySeconds: 30
@@ -258,7 +258,7 @@ kind: Deployment
 metadata:
   labels:
     app: redis
-    application: master-dev2-cdtn-api
+    application: master-dev42-cdtn-api
     owner: cdtn-api
     team: cdtn-api
     cert: wildcard
@@ -267,9 +267,9 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-cdtn-api
-    app.gitlab.com/env: master-dev2
-    app.gitlab.com/env.name: master-dev2
-  namespace: cdtn-api-85-master-dev2
+    app.gitlab.com/env: master-dev42
+    app.gitlab.com/env.name: master-dev42
+  namespace: cdtn-api-85-master-dev42
 spec:
   ports:
     - name: http

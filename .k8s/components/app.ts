@@ -15,53 +15,57 @@ const redisEnv: IIoK8sApiCoreV1EnvVar = {
   value: "redis://redis:80",
 };
 
-// create the main app container + service + ingress
-const manifests = create("app", {
-  env,
-  config: {
-    image: getHarborImagePath({ name: "cdtn-api-app" }),
-    containerPort: 3000,
-  },
-  deployment: {
-    container: {
-      resources: {
-        requests: {
-          cpu: "5m",
-          memory: "128Mi",
-        },
-        limits: {
-          cpu: "1000m",
-          memory: "768Mi",
+const createManifests = async () => {
+  // create the main app container + service + ingress
+  const manifests = await create("app", {
+    env,
+    config: {
+      image: getHarborImagePath({ name: "cdtn-api-app" }),
+      containerPort: 3000,
+    },
+    deployment: {
+      container: {
+        resources: {
+          requests: {
+            cpu: "5m",
+            memory: "128Mi",
+          },
+          limits: {
+            cpu: "1000m",
+            memory: "768Mi",
+          },
         },
       },
     },
-  },
-});
+  });
 
-// create an initContainre to feed REDIS
-const initContainer = new Container({
-  name: "init",
-  image: getHarborImagePath({ name: "cdtn-api-init" }),
-  imagePullPolicy: "Always",
-  resources: {
-    requests: {
-      cpu: "2000m",
-      memory: "2Gi",
+  // create an initContainre to feed REDIS
+  const initContainer = new Container({
+    name: "init",
+    image: getHarborImagePath({ name: "cdtn-api-init" }),
+    imagePullPolicy: "Always",
+    resources: {
+      requests: {
+        cpu: "2000m",
+        memory: "2Gi",
+      },
+      limits: {
+        cpu: "2000m",
+        memory: "2Gi",
+      },
     },
-    limits: {
-      cpu: "2000m",
-      memory: "2Gi",
-    },
-  },
-  env: [redisEnv],
-});
+    env: [redisEnv],
+  });
 
-const deployment = manifests.find(
-  (manifest: { kind: string }): manifest is Deployment => manifest.kind === "Deployment",
-);
-ok(deployment);
+  const deployment = manifests.find(
+    (manifest: { kind: string }): manifest is Deployment => manifest.kind === "Deployment",
+  );
+  ok(deployment);
 
-addEnv({ deployment, data: new EnvVar(redisEnv) });
-addInitContainer(deployment, initContainer);
+  addEnv({ deployment, data: new EnvVar(redisEnv) });
+  addInitContainer(deployment, initContainer);
 
-export default manifests;
+  return manifests;
+};
+
+export default createManifests();
