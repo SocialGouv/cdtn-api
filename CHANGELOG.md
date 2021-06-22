@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/SocialGouv/cdtn-api/compare/v1.8.0...v1.8.1) (2021-06-22)
+
+
+### Bug Fixes
+
+* force release ([5a338d3](https://github.com/SocialGouv/cdtn-api/commit/5a338d3796cf31a6a0af8b9464375f762d4cab9c))
+
 # [1.8.0](https://github.com/SocialGouv/cdtn-api/compare/v1.7.0...v1.8.0) (2021-05-10)
 
 
