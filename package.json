@@ -3,6 +3,10 @@
   "version": "1.8.1",
   "license": "Apache-2.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SocialGouv/cdtn-api.git"
+  },
   "scripts": {
     "cache:update": "node -r dotenv/config -r esm ./scripts/updateCache.js",
     "dev": "nodemon --exec \"node -r dotenv/config -r esm ./src\" --watch ./src",
