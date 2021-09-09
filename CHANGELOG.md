@@ -1,3 +1,10 @@
+## [1.8.3](https://github.com/SocialGouv/cdtn-api/compare/v1.8.2...v1.8.3) (2021-09-09)
+
+
+### Bug Fixes
+
+* **k8s:** upgrade for kube 1.2 ([#82](https://github.com/SocialGouv/cdtn-api/issues/82)) ([9c28b59](https://github.com/SocialGouv/cdtn-api/commit/9c28b598b7af749283d3bf254c706252183a0ccc))
+
 ## [1.8.2](https://github.com/SocialGouv/cdtn-api/compare/v1.8.1...v1.8.2) (2021-09-03)
 
 
