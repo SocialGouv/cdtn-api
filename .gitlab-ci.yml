@@ -31,16 +31,87 @@ Build:
   script:
     - echo "look ma, no build"
 
-K8S Test:
-  stage: Code Quality
-  extends:
-    - .base_deploy_kosko_stage
+Deploy:
+  stage: Deploy
+  cache:
+    key:
+      files:
+      - ${K8S_FOLDER}/yarn.lock
+      - deploy-${CI_COMMIT_REF_SLUG}
+      prefix: ${CI_JOB_NAME}
+      paths:
+        - ${CI_PROJECT_DIR}/.cache
+        - ${K8S_FOLDER}/node_modules
+        - ${CI_PROJECT_DIR}/dotenv.env
+        - ${CI_PROJECT_DIR}/.cache
+        - ${K8S_FOLDER}/node_modules
+  after_script:
+    - echo "CI_ENVIRONMENT_URL=${CI_ENVIRONMENT_URL}" >> dotenv.env
+  variables:
+    K8S_FOLDER: ${CI_PROJECT_DIR}/.k8s
+    KOSKO_GENERATE_ARGS: ""
+  image: ghcr.io/socialgouv/docker/no-k8s:6.53.1
+  dependencies: []
   script:
-    - *print_env
-    #
     - yarn
     #
     - yarn test
+    - |
+      if [[ -d "${CI_PROJECT_DIR}/.socialgouv" ]]; then
+        echo "Use .socialgouv config."
+        rm -rf /k8s/.socialgouv
+        cp -r ${CI_PROJECT_DIR}/.socialgouv /k8s/
+        if [[ -d "/k8s/.socialgouv/environments" ]]; then
+          cp -r /k8s/.socialgouv/environments/* /k8s/.k8s/environments/
+        fi
+        if [[ -d "/k8s/.socialgouv/components" ]]; then
+          cp -r /k8s/.socialgouv/components/* /k8s/.k8s/components/
+        fi
+        cd /k8s/.k8s
+      else
+        yarn config set cache-folder ${CI_PROJECT_DIR}/.cache/yarn
+        cd ${K8S_FOLDER}
+        yarn --production --frozen-lockfile --prefer-offline --link-duplicates
+      fi
+    #
+    - echo "kosko generate ${KOSKO_GENERATE_ARGS} >> ${CI_PROJECT_DIR}/manifest.yaml"
+    - kosko generate ${KOSKO_GENERATE_ARGS} > ${CI_PROJECT_DIR}/manifest.yaml
+    #
+    - cd -
+    - |
+      if [[ -d "${KOSKO_APPEND_YAML_FROM}" ]]; then
+        echo "Append to ${CI_PROJECT_DIR}/manifest.yaml"
+        find ${KOSKO_APPEND_YAML_FROM} -name '*.yaml'
+        find ${KOSKO_APPEND_YAML_FROM} -name '*.yaml' -exec \
+          echo '---' \; -exec cat {} \; \
+        >> ${CI_PROJECT_DIR}/manifest.yaml
+      fi
+    # hack: this enable new cert-manager for legacy gitlab+nok8s repos (ex: medle)
+    - sed -i "s#certmanager.k8s.io/cluster-issuer#cert-manager.io/cluster-issuer#" ${CI_PROJECT_DIR}/manifest.yaml
+    - |
+      if [[ -n $AUTO_DEVOPS_ENABLE_KAPP ]]; then
+        if [[ -z $PRODUCTION ]]; then
+          kubectl create ns ${KUBE_NAMESPACE} || true
+          kubectl annotate ns ${KUBE_NAMESPACE} azure-pg-admin-user=${CI_PROJECT_NAME} || true
+        fi
+        kapp --dangerous-override-ownership-of-existing-resources -y deploy -a ${CI_PROJECT_NAME} --namespace ${KUBE_NAMESPACE} -f ${CI_PROJECT_DIR}/manifest.yaml ${KAPP_DEPLOY_ARGS}
+      else
+        kubectl apply -f ${CI_PROJECT_DIR}/manifest.yaml
+      fi
+    - |
+      echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+      [[ -z $PRODUCTION ]] && GRAFANA_CLUSTER="dev2" || GRAFANA_CLUSTER="prod2";
+      [[ -f "${CI_PROJECT_DIR}/manifest.yaml" ]] && yq e -N '.spec.rules[] .host' "${CI_PROJECT_DIR}/manifest.yaml" | grep -v null | sed -e s/^/\ \ 🚀\ https\:\\/\\// || true
+      echo "  📕 logs : https://grafana.fabrique.social.gouv.fr/explore?orgId=1&left=%5B%22now-1h%22,%22now%22,%22Loki-tail%22,%7B%22expr%22:%22%7Bnamespace%3D%5C%22${KUBE_NAMESPACE}%5C%22%7D%22%7D%5D"
+      echo "  📊 pods : https://grafana.fabrique.social.gouv.fr/d/85a562078cdf77779eaa1add43ccec1e/kubernetes-compute-resources-namespace-pods?orgId=1&refresh=10s&var-datasource=default&var-cluster=${GRAFANA_CLUSTER}&var-namespace=${KUBE_NAMESPACE}"
+      echo "  📊 workloads : https://grafana.fabrique.social.gouv.fr/d/a87fb0d919ec0ea5f6543124e16c42a5/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=default&var-cluster=${GRAFANA_CLUSTER}&var-namespace=${KUBE_NAMESPACE}&var-type=deployment"
+      echo "  🔎 rancher : https://rancher.fabrique.social.gouv.fr/p/${RANCHER_PROJECT_ID}/workloads"
+      echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - manifest.yaml
+    when: always
 
 Register Kaniko image:
   extends: .autodevops_register_kaniko_image
