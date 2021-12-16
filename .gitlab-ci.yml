@@ -34,3 +34,15 @@ K8S Test:
 Build:
   script:
     - echo "look ma, no build"
+    
+Register Kaniko image:
+  extends: .autodevops_register_kaniko_image
+  variables:
+    IMAGE_NAME: cdtn-api-app
+
+Register init image:
+  extends: .autodevops_register_kaniko_image
+  variables:
+    IMAGE_NAME: cdtn-api-init
+    DOCKER_BUILD_ARGS: >-
+      --dockerfile init.Dockerfile
