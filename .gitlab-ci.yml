@@ -30,6 +30,8 @@ Install:
 K8S Test:
   script:
     - echo "look ma, no k8s test"
+  when:
+    - never
     
 Build:
   script:
