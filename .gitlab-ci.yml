@@ -27,21 +27,14 @@ Install:
     # Removes ~150M
     - yarn cache clean @socialgouv/legi-data
 
+K8S Test:
+  script:
+    - echo "look ma, no k8s test"
+    
 Build:
   script:
     - echo "look ma, no build"
-
-K8S Test:
-  stage: Code Quality
-  extends:
-    - .base_deploy_kosko_stage
-  script:
-    - *print_env
-    #
-    - yarn
-    #
-    - yarn test
-
+    
 Register Kaniko image:
   extends: .autodevops_register_kaniko_image
   variables:
