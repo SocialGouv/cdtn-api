@@ -31,6 +31,17 @@ Build:
   script:
     - echo "look ma, no build"
 
+K8S Test:
+  stage: Code Quality
+  extends:
+    - .base_deploy_kosko_stage
+  script:
+    - *print_env
+    #
+    - yarn
+    #
+    - yarn test
+
 Register Kaniko image:
   extends: .autodevops_register_kaniko_image
   variables:
