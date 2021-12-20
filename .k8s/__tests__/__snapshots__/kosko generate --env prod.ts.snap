@@ -156,6 +156,27 @@ spec:
         - cdtn-api.fabrique.social.gouv.fr
       secretName: app-crt
 ---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-cdtn-api
+  namespace: cdtn-api
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
