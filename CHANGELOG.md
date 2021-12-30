@@ -1,3 +1,10 @@
+## [1.8.6](https://github.com/SocialGouv/cdtn-api/compare/v1.8.5...v1.8.6) (2021-12-30)
+
+
+### Bug Fixes
+
+* **secu:** add network policy ([#96](https://github.com/SocialGouv/cdtn-api/issues/96)) ([e69a854](https://github.com/SocialGouv/cdtn-api/commit/e69a85447e404e40295a1edee9f10ef4a69de1c1))
+
 ## [1.8.5](https://github.com/SocialGouv/cdtn-api/compare/v1.8.4...v1.8.5) (2021-12-21)
 
 
