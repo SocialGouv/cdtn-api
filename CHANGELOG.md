@@ -1,3 +1,10 @@
+## [1.8.8](https://github.com/SocialGouv/cdtn-api/compare/v1.8.7...v1.8.8) (2022-01-04)
+
+
+### Bug Fixes
+
+* **dep:** kali-data ([#99](https://github.com/SocialGouv/cdtn-api/issues/99)) ([4429bc1](https://github.com/SocialGouv/cdtn-api/commit/4429bc125280942cc7f9cf3382ac2aa5940681be))
+
 ## [1.8.7](https://github.com/SocialGouv/cdtn-api/compare/v1.8.6...v1.8.7) (2021-12-30)
 
 
