@@ -1,18 +1,18 @@
 {
   "dependencies": {
     "@kosko/env": "^3.0.0",
-    "@kubernetes-models/sealed-secrets": "^2.0.2",
+    "@kubernetes-models/sealed-secrets": "^3.0.0",
     "@socialgouv/kosko-charts": "^9.10.0",
-    "@types/node": "^13.13.4",
-    "kosko": "^1.1.5",
-    "kubernetes-models": "^2.0.2",
-    "ts-node": "^9.0.0"
+    "@types/node": "^16.0.0",
+    "kosko": "^2.0.0",
+    "kubernetes-models": "^3.0.0",
+    "ts-node": "^10.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/plugin-transform-modules-commonjs": "^7.12.1",
     "@types/jest": "^26.0.16",
-    "dotenv": "^8.2.0",
+    "dotenv": "^16.0.0",
     "jest": "^27.4.5",
     "typescript": "^4.1.2"
   },
