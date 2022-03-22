@@ -38,7 +38,7 @@
     "koa": "2.13.0",
     "npmlog": "4.1.2",
     "redis": "3.0.2",
-    "unist-util-flat-filter": "1.0.0"
+    "unist-util-flat-filter": "2.0.0"
   },
   "devDependencies": {
     "@babel/core": "7.12.9",
