@@ -1,3 +1,10 @@
+## [1.8.9](https://github.com/SocialGouv/cdtn-api/compare/v1.8.8...v1.8.9) (2022-03-22)
+
+
+### Bug Fixes
+
+* documentation indentation ([5815f61](https://github.com/SocialGouv/cdtn-api/commit/5815f613379b119446c603fae4e57033ea54a6db))
+
 ## [1.8.8](https://github.com/SocialGouv/cdtn-api/compare/v1.8.7...v1.8.8) (2022-01-04)
 
 
