@@ -102,4 +102,4 @@ jobs:
           cmd: echo $(cat manifests-dev.yml | yq eval-all '.spec.rules[] .host' - | tail -n 1)
       - name: Run test e2e
         run: |
-          CODECEPT_BASEURL=https://${{ steps.url.outputs.result }} yarn test:e2e
+          BASE_URL=https://${{ steps.url.outputs.result }} yarn test:e2e
