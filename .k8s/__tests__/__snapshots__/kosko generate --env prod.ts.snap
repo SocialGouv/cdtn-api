@@ -80,7 +80,7 @@ spec:
               value: redis://redis:80
       initContainers:
         - name: init
-          image: harbor.fabrique.social.gouv.fr/cdtn/cdtn-api-init:1.2.3
+          image: ghcr.io/socialgouv/cdtn-api/cdtn-api-init:v1.2.3
           imagePullPolicy: Always
           resources:
             requests:

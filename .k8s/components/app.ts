@@ -7,7 +7,6 @@ import { IIoK8sApiCoreV1EnvVar } from "kubernetes-models/_definitions/IoK8sApiCo
 
 import { create } from "@socialgouv/kosko-charts/components/app";
 import { addInitContainer } from "@socialgouv/kosko-charts/utils/addInitContainer";
-import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImagePath";
 import { addEnv } from "@socialgouv/kosko-charts/utils/addEnv";
 import {
   getGithubRegistryImagePath
@@ -48,7 +47,10 @@ const createManifests = async () => {
   // create an initContainre to feed REDIS
   const initContainer = new Container({
     name: "init",
-    image: getHarborImagePath({ name: "cdtn-api-init" }),
+    image: getGithubRegistryImagePath({
+      name: "cdtn-api-init",
+      project: "cdtn-api",
+    }),
     imagePullPolicy: "Always",
     resources: {
       requests: {
