@@ -6,9 +6,6 @@ on:
       - "**"
     tags-ignore:
       - v*
-  push:
-    branches:
-      - "**"
 
 concurrency:
   cancel-in-progress: true
@@ -33,7 +30,7 @@ jobs:
           project: "cdtn-api"
           imageName: cdtn-api/${{ matrix.images }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          dockerfile: {{ matrix.file }}
+          dockerfile: ${{ matrix.file }}
           dockercontext: "."
 
   manifests:
