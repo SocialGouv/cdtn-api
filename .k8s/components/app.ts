@@ -9,6 +9,9 @@ import { create } from "@socialgouv/kosko-charts/components/app";
 import { addInitContainer } from "@socialgouv/kosko-charts/utils/addInitContainer";
 import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImagePath";
 import { addEnv } from "@socialgouv/kosko-charts/utils/addEnv";
+import {
+  getGithubRegistryImagePath
+} from "@socialgouv/kosko-charts/utils/getGithubRegistryImagePath";
 
 const redisEnv: IIoK8sApiCoreV1EnvVar = {
   name: "REDIS_URL",
@@ -20,7 +23,10 @@ const createManifests = async () => {
   const manifests = await create("app", {
     env,
     config: {
-      image: getHarborImagePath({ name: "cdtn-api-app" }),
+      image: getGithubRegistryImagePath({
+        name: "cdtn-api-app",
+        project: "cdtn-api",
+      }),
       containerPort: 3000,
     },
     deployment: {

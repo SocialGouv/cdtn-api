@@ -65,8 +65,7 @@ spec:
         cert: wildcard
     spec:
       containers:
-        - image: >-
-            harbor.fabrique.social.gouv.fr/cdtn/cdtn-api-app:0123456789abcdefghijklmnopqrstuvwxyz0123
+        - image: 'ghcr.io/socialgouv/cdtn-api/cdtn-api-app:'
           livenessProbe:
             failureThreshold: 6
             httpGet:

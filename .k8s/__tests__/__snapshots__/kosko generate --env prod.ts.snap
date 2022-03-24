@@ -40,7 +40,7 @@ spec:
         team: cdtn-api
     spec:
       containers:
-        - image: harbor.fabrique.social.gouv.fr/cdtn/cdtn-api-app:1.2.3
+        - image: ghcr.io/socialgouv/cdtn-api/cdtn-api-app:v1.2.3
           livenessProbe:
             failureThreshold: 6
             httpGet:
