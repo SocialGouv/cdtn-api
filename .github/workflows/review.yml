@@ -20,9 +20,9 @@ jobs:
       matrix:
         include:
           - images: "cdtn-api-app"
-            dockerfile: "Dockerfile"
+            file: "Dockerfile"
           - images: "cdtn-api-init"
-            dockerfile: "init.Dockerfile"
+            file: "init.Dockerfile"
     steps:
       - name: Register docker images
         uses: SocialGouv/actions/autodevops-build-register@local-cache-cdtn
@@ -30,7 +30,7 @@ jobs:
           project: "cdtn-api"
           imageName: cdtn-api/${{ matrix.images }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          dockerfile: "./{{ matrix.dockerfile }}"
+          dockerfile: {{ matrix.file }}
           dockercontext: "."
 
   manifests:
