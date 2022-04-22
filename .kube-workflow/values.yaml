@@ -3,6 +3,12 @@ app:
   env:
     - name: REDIS_URL
       value: redis://redis:80
-
+  resources:
+    limits:
+      cpu: 1
+      memory: 1Gi
+    requests:
+      cpu: 300m
+      memory: 128Mi
 redis:
   enabled: true
