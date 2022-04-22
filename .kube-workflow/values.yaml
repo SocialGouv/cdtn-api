@@ -6,9 +6,8 @@ app:
   resources:
     limits:
       cpu: 1
-      memory: 2Gi
+      memory: 3Gi
     requests:
-      cpu: 300m
-      memory: 256Mi
+      cpu: 1Gi
 redis:
   enabled: true
