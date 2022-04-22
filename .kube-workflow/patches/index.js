@@ -3,7 +3,6 @@ yarn cache:update
 `;
 
 module.exports = (manifests, values) => {
-  console.log("values", values);
   for (const manifest of manifests) {
     if (manifest.kind === "Deployment" && manifest.metadata.name === "app") {
       manifest.spec.template.spec = {
