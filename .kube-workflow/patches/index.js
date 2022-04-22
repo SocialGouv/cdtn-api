@@ -1,6 +1,3 @@
-const initScript = `set -e
-yarn cache:update
-`;
 
 // this adds an initContainer to the app pod that feed the redis
 module.exports = (manifests, values) => {
@@ -13,7 +10,7 @@ module.exports = (manifests, values) => {
             name: "init",
             image: manifest.spec.template.spec.containers[0].image,
             env: [{ name: "REDIS_URL", value: "redis://redis:80" }],
-            command: ["/bin/sh", "-c", initScript],
+            command: ["/bin/sh", "-c", "set -e; yarn cache:update"],
             resources: manifest.spec.template.spec.containers[0].resources,
           },
         ],
