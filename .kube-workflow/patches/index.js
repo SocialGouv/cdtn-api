@@ -2,6 +2,7 @@ const initScript = `set -e
 yarn cache:update
 `;
 
+// this adds an initContainer to the app pod that feed the redis
 module.exports = (manifests, values) => {
   for (const manifest of manifests) {
     if (manifest.kind === "Deployment" && manifest.metadata.name === "app") {
