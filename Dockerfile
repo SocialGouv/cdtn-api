@@ -11,11 +11,12 @@ ENV REDIS_URL=$REDIS_URL
 
 WORKDIR /app
 
-COPY package.json yarn.lock /app/
+COPY package.json yarn.lock ./
 
 RUN yarn --frozen-lockfile
 
-COPY src /app/src
+COPY src ./src
+COPY scripts ./scripts
 
 USER node
 

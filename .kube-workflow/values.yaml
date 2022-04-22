@@ -1,0 +1,16 @@
+app:
+  needs: [redis]
+  probesPath: /healthz
+  env:
+    - name: REDIS_URL
+      value: redis://redis:80
+  resources:
+    limits:
+      cpu: 1
+      memory: 3Gi
+    requests:
+      cpu: 300m
+      memory: 1Gi
+
+redis:
+  enabled: true

@@ -1,0 +1,21 @@
+
+// this adds an initContainer to the app pod that feed the redis
+module.exports = (manifests, values) => {
+  for (const manifest of manifests) {
+    if (manifest.kind === "Deployment" && manifest.metadata.name === "app") {
+      manifest.spec.template.spec = {
+        ...manifest.spec.template.spec,
+        initContainers: [
+          {
+            name: "init",
+            image: manifest.spec.template.spec.containers[0].image,
+            env: [{ name: "REDIS_URL", value: "redis://redis:80" }],
+            command: ["/bin/sh", "-c", "set -e; yarn cache:update"],
+            resources: manifest.spec.template.spec.containers[0].resources,
+          },
+        ],
+      };
+    }
+  }
+  return manifests;
+};
