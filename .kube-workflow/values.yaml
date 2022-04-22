@@ -1,0 +1,22 @@
+app:
+  needs: [init]
+  env:
+    - name: REDIS_URL
+      value: redis://redis:80
+
+redis:
+  enabled: true
+
+jobs:
+  runs:
+    - name: init
+      needs: [redis]
+      checkout: false # no need to checkout the repo as we use the docker image
+      shell: sh
+      image:
+        "{{ .Values.global.registry }}/{{ .Values.global.imageRepository }}/app:{{
+        .Values.global.imageTag }}"
+      run: "yarn cache:update"
+      env:
+        - name: REDIS_URL
+          value: redis://redis:80
