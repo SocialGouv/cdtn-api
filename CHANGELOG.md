@@ -1,3 +1,10 @@
+## [1.8.10](https://github.com/SocialGouv/cdtn-api/compare/v1.8.9...v1.8.10) (2022-04-22)
+
+
+### Bug Fixes
+
+* use kube-workflow ([#102](https://github.com/SocialGouv/cdtn-api/issues/102)) ([ae58a52](https://github.com/SocialGouv/cdtn-api/commit/ae58a522082d0f823b6ef93e677df39c65c441aa))
+
 ## [1.8.9](https://github.com/SocialGouv/cdtn-api/compare/v1.8.8...v1.8.9) (2022-03-22)
 
 
