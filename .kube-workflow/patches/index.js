@@ -12,7 +12,7 @@ module.exports = (manifests, values) => {
           {
             name: "init",
             image: manifest.spec.template.spec.containers[0].image,
-            env: { name: "REDIS_URL", value: "redis://redis:80" },
+            env: [{ name: "REDIS_URL", value: "redis://redis:80" }],
             command: ["/bin/sh", "-c", initScript],
           },
         ],
