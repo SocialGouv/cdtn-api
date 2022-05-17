@@ -48,7 +48,7 @@
     "@socialgouv/eslint-config-strict": "1.0.0-beta.5",
     "@types/jest": "26.0.16",
     "@types/koa": "2.11.6",
-    "@types/node": "14.14.10",
+    "@types/node": "16.11.36",
     "@types/npmlog": "4.1.2",
     "@types/redis": "2.8.28",
     "axios": "0.21.0",
