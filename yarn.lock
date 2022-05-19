@@ -1167,19 +1167,19 @@
     eslint-plugin-simple-import-sort "^5.0.3"
     eslint-plugin-sort-keys-fix "^1.1.1"
 
-"@socialgouv/kali-data@2.260.0":
-  version "2.260.0"
-  resolved "https://registry.yarnpkg.com/@socialgouv/kali-data/-/kali-data-2.260.0.tgz#4636915a3ab132b148833803512c8e8804b46e7f"
-  integrity sha512-5iv5TOLeJmA6V0ywR3gh9pHia8Shadh2v+9i7DkoxOsOGPVX001XhuLCc1rGSBWudOfuuTdaKoyDiXAzGUIVeQ==
+"@socialgouv/kali-data@2.297.0":
+  version "2.297.0"
+  resolved "https://registry.yarnpkg.com/@socialgouv/kali-data/-/kali-data-2.297.0.tgz#7a1f0bbeb10b29c6a16616938f279125cde4a1c5"
+  integrity sha512-AkqSLisrPetejaf6nuI78UaRX1OFkYmm76062ejKYhtSlr2yCQ54jHSpS1qEiGP/pwv3QHwngYpx/uQcvuusnQ==
   dependencies:
     unist-util-find "1.0.2"
     unist-util-flat-filter "1.0.0"
     unist-util-parents "1.0.3"
 
-"@socialgouv/legi-data@2.133.0":
-  version "2.133.0"
-  resolved "https://registry.yarnpkg.com/@socialgouv/legi-data/-/legi-data-2.133.0.tgz#9dd1fb3a48fbf8a23e6de75da7d8afde89464afd"
-  integrity sha512-XXs6RK+nMiVuF12pgY8AS7GL62OF6g7eIvbhAafDYNa2dL4DrNm47Tc0rhbBBzd1GyYJ6uRM4D/B+8mi8FFiTw==
+"@socialgouv/legi-data@2.158.0":
+  version "2.158.0"
+  resolved "https://registry.yarnpkg.com/@socialgouv/legi-data/-/legi-data-2.158.0.tgz#f2fe3091710772873e7a6aa237acccd3c9d352fc"
+  integrity sha512-tsITH7Gw19pFZROlqhvoUlmzUav0szBbdVwFAiZRwbM0GiI2pycWnWwDwjgbZ5C7dsmjYhwR8ETtQzwdXslMQw==
   dependencies:
     unist-util-find "^1.0.2"
     unist-util-parents "^1.0.3"
