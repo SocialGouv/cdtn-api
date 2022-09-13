@@ -6,7 +6,7 @@
 
 ## API
 
-_Documentation publication [in progress](https://github.com/SocialGouv/documentation-api)._
+Documentation publication [in progress](https://github.com/SocialGouv/documentation-api).
 
 ---
 
