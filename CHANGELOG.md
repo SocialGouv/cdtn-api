@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/SocialGouv/cdtn-api/compare/v1.8.11...v1.9.0) (2022-09-13)
+
+
+### Features
+
+* update documentation ([f93de9e](https://github.com/SocialGouv/cdtn-api/commit/f93de9eaf4b2d2aa67a70499254b5eb67aada97a))
+
 ## [1.8.11](https://github.com/SocialGouv/cdtn-api/compare/v1.8.10...v1.8.11) (2022-07-28)
 
 
