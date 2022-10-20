@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/SocialGouv/cdtn-api/compare/v1.9.0...v1.10.0) (2022-10-20)
+
+
+### Features
+
+* update kali and legi dependencies ([390860c](https://github.com/SocialGouv/cdtn-api/commit/390860ce0f8aebbd7179030c60bc7ed9621bc8aa))
+
 # [1.9.0](https://github.com/SocialGouv/cdtn-api/compare/v1.8.11...v1.9.0) (2022-09-13)
 
 
