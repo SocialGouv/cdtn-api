@@ -28,8 +28,8 @@
   "dependencies": {
     "@koa/cors": "3.1.0",
     "@koa/router": "9.4.0",
-    "@socialgouv/kali-data": "^2.376.0",
-    "@socialgouv/legi-data": "^2.181.0",
+    "@socialgouv/kali-data": "2.404.0",
+    "@socialgouv/legi-data": "2.188.0",
     "cross-env": "7.0.3",
     "dotenv": "8.2.0",
     "esm": "3.2.25",
