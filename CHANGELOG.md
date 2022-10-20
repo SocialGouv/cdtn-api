@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/SocialGouv/cdtn-api/compare/v1.10.0...v1.10.1) (2022-10-20)
+
+
+### Bug Fixes
+
+* yarn.lock ([ccbb542](https://github.com/SocialGouv/cdtn-api/commit/ccbb542b9bdb678846cf528aa8e441ff722d78fd))
+
 # [1.10.0](https://github.com/SocialGouv/cdtn-api/compare/v1.9.0...v1.10.0) (2022-10-20)
 
 
