@@ -1,0 +1,5 @@
+projectName: cdtn
+dependencies:
+  fabrique:
+    import: socialgouv/kontinuous/plugins/fabrique
+    registry: ghcr.io

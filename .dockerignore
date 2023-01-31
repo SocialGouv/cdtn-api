@@ -18,3 +18,5 @@ LICENSE
 /.prettierc
 /babel.config.js
 /tsconfig.json
+
+.kontinuous
