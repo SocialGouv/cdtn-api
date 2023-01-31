@@ -28,7 +28,7 @@ jobs:
         - name: REDIS_URL
           value: redis://redis:80
         - name: NODE_OPTIONS
-          value: --max-old-space-size=4096
+          value: --max-old-space-size=3072
       resources:
         limits:
           cpu: 1
