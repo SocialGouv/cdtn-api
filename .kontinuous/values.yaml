@@ -24,3 +24,6 @@ jobs:
       shell: sh
       run: |
         yarn cache:update
+      env:
+        - name: REDIS_URL
+          value: redis://redis:80
