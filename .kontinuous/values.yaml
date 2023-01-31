@@ -1,0 +1,33 @@
+app:
+  ~needs: [redis]
+  imagePackage: app
+  probesPath: /healthz
+  env:
+    - name: REDIS_URL
+      value: redis://redis:80
+  resources:
+    limits:
+      cpu: 1
+      memory: 3Gi
+    requests:
+      cpu: 300m
+      memory: 1Gi
+
+redis:
+  image: redis:6.2.5-alpine3.14
+
+jobs:
+  runs:
+    cache-update:
+      image: "{{ .Values.global.registry }}/{{ .Values.global.imageProject }}/{{ .Values.global.imageRepository }}/app:{{ .Values.global.imageTag }}"
+      ~needs: [redis, app]
+      shell: sh
+      run: |
+        yarn cache:update
+      env:
+        - name: REDIS_URL
+          value: redis://redis:80
+        - name: NODE_OPTIONS
+          value: --max-old-space-size=3072
+      cpuLimit: 1
+      memoryLimit: 4Gi
