@@ -1,0 +1,477 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    kontinuous/gitBranch: master
+    kontinuous/mainNamespace: 'true'
+    kontinuous/chartPath: project.fabrique.contrib.namespace
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/namespace/templates/namespace.yaml
+    kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+  labels:
+    application: cdtn-api
+    kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+    kontinuous/deployment.env: cdtn-api-master
+    kontinuous/ref: master
+    kontinuous/gitSha: '0000000000000000000000000000000000000000'
+    kontinuous/appVersion: '0000000000000000000000000000000000000000'
+    kontinuous/resourceName: namespace-cdtn-api-master-4jifzl19
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+    cert: wildcard
+  name: cdtn-api-master
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-ingress
+  namespace: cdtn-api-master
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/network-policy.yml
+    kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+  labels:
+    kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+    kontinuous/deployment.env: cdtn-api-master
+    kontinuous/ref: master
+    kontinuous/gitSha: '0000000000000000000000000000000000000000'
+    kontinuous/appVersion: '0000000000000000000000000000000000000000'
+    kontinuous/resourceName: networkpolicy-netpol-ingress-61ndxljw
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  ingress:
+    - from:
+        - podSelector: {}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: ingress-controller
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network-policy/source: monitoring
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.security-policies
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/security-policies/templates/service-account.yaml
+    kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+  labels:
+    kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+    kontinuous/deployment.env: cdtn-api-master
+    kontinuous/ref: master
+    kontinuous/gitSha: '0000000000000000000000000000000000000000'
+    kontinuous/appVersion: '0000000000000000000000000000000000000000'
+    kontinuous/resourceName: serviceaccount-default-2g5dmk74
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  namespace: cdtn-api-master
+automountServiceAccountToken: false
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-local-cdtn-api-master-cache-update-jobs-contrib-f-66x83aco
+  namespace: cdtn-api-master
+  annotations:
+    kontinuous/needsName: cache-update
+    kontinuous/needsNames: '["cache-update"]'
+    kontinuous/plugin.needs: '["redis","app"]'
+    janitor/ttl: 7d
+    kontinuous/chartPath: project.fabrique.contrib.jobs
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/jobs/templates/jobs.yaml
+    kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+    kontinuous/depname.full: >-
+      project.fabrique.contrib.jobs.job.job-local-cdtn-api-master-cache-update-jobs-contrib-f-66x83aco
+    kontinuous/depname.chartResource: jobs.job.job-local-cdtn-api-master-cache-update-jobs-contrib-f-66x83aco
+    kontinuous/depname.chartName: jobs
+    kontinuous/depname.chartPath: project.fabrique.contrib.jobs
+    kontinuous/depname.resourcePath: job.job-local-cdtn-api-master-cache-update-jobs-contrib-f-66x83aco
+    kontinuous/depname.resourceName: job-local-cdtn-api-master-cache-update-jobs-contrib-f-66x83aco
+    kontinuous/plugin.log: 'true'
+  labels:
+    kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+    kontinuous/deployment.env: cdtn-api-master
+    kontinuous/ref: master
+    kontinuous/gitSha: '0000000000000000000000000000000000000000'
+    kontinuous/appVersion: '0000000000000000000000000000000000000000'
+    kontinuous/resourceName: job-job-local-cdtn-api-master-cache-update-jobs-contr-hd5c924i
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 3600
+  ttlSecondsAfterFinished: 1800
+  template:
+    metadata:
+      labels:
+        environment: local
+        ref: master
+        repository: cdtn-api
+        runName: custom
+        kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+        kontinuous/deployment.env: cdtn-api-master
+        kontinuous/ref: master
+        kontinuous/gitSha: '0000000000000000000000000000000000000000'
+        kontinuous/appVersion: '0000000000000000000000000000000000000000'
+        kontinuous/resourceName: job-job-local-cdtn-api-master-cache-update-jobs-contr-hd5c924i
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: job
+          image: >-
+            harbor.fabrique.social.gouv.frcdtncdtn-api/app:sha-0000000000000000000000000000000000000000
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: KONTINUOUS_OUTPUT
+              value: /kontinuous-output
+            - name: KONTINUOUS_INPUT
+              value: /kontinuous-input
+          command:
+            - /bin/bash
+            - '-c'
+            - |
+              set -e
+              yarn cache:update
+          resources:
+            limits:
+              cpu: '1'
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: action
+              mountPath: /action
+            - name: kontinuous-io
+              mountPath: /kontinuous-output
+              subPath: >-
+                cdtn-api-master-0000000000000000000000000000000000000000/jobs.cache-update
+      securityContext:
+        fsGroup: 1000
+      volumes:
+        - name: workspace
+          hostPath:
+            path: /Users/max/Documents/Code/cdtn-api
+            type: Directory
+        - name: action
+          emptyDir: {}
+        - name: kontinuous-io
+          emptyDir: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: app
+    application: cdtn-api
+    kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+    kontinuous/deployment.env: cdtn-api-master
+    kontinuous/ref: master
+    kontinuous/gitSha: '0000000000000000000000000000000000000000'
+    kontinuous/appVersion: '0000000000000000000000000000000000000000'
+    kontinuous/resourceName: deployment-app-55fzcjih
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: cdtn-api-master
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/app/templates/deployment.yaml
+    kontinuous/plugin.needs: '["redis"]'
+    kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+    kontinuous/depname.full: project.fabrique.contrib.app.deployment.app
+    kontinuous/depname.chartResource: app.deployment.app
+    kontinuous/depname.chartName: app
+    kontinuous/depname.chartPath: project.fabrique.contrib.app
+    kontinuous/depname.resourcePath: deployment.app
+    kontinuous/depname.resourceName: app
+    kontinuous/plugin.log: 'true'
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app
+  template:
+    metadata:
+      labels:
+        component: app
+        application: cdtn-api
+        namespace: cdtn-api-master
+        kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+        kontinuous/deployment.env: cdtn-api-master
+        kontinuous/ref: master
+        kontinuous/gitSha: '0000000000000000000000000000000000000000'
+        kontinuous/appVersion: '0000000000000000000000000000000000000000'
+        kontinuous/resourceName: deployment-app-55fzcjih
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: namespace
+                      operator: In
+                      values:
+                        - cdtn-api-master
+                    - key: component
+                      operator: In
+                      values:
+                        - app
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - image: >-
+            harbor.fabrique.social.gouv.fr/cdtn/cdtn-api/app:sha-0000000000000000000000000000000000000000
+          name: app
+          ports:
+            - containerPort: 3000
+              name: http
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: '1'
+              memory: 3Gi
+            requests:
+              cpu: 300m
+              memory: 1Gi
+          env:
+            - name: REDIS_URL
+              value: redis://redis:80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    component: redis
+    application: cdtn-api
+    kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+    kontinuous/deployment.env: cdtn-api-master
+    kontinuous/ref: master
+    kontinuous/gitSha: '0000000000000000000000000000000000000000'
+    kontinuous/appVersion: '0000000000000000000000000000000000000000'
+    kontinuous/resourceName: deployment-redis-511p43mf
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: redis
+  namespace: cdtn-api-master
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.redis
+    kontinuous/source: >-
+      project/charts/fabrique/charts/contrib/charts/redis/templates/deployment.yaml
+    kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+    kontinuous/depname.full: project.fabrique.contrib.redis.deployment.redis
+    kontinuous/depname.chartResource: redis.deployment.redis
+    kontinuous/depname.chartName: redis
+    kontinuous/depname.chartPath: project.fabrique.contrib.redis
+    kontinuous/depname.resourcePath: deployment.redis
+    kontinuous/depname.resourceName: redis
+    kontinuous/plugin.log: 'true'
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: redis
+  template:
+    metadata:
+      labels:
+        component: redis
+        kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+        kontinuous/deployment.env: cdtn-api-master
+        kontinuous/ref: master
+        kontinuous/gitSha: '0000000000000000000000000000000000000000'
+        kontinuous/appVersion: '0000000000000000000000000000000000000000'
+        kontinuous/resourceName: deployment-redis-511p43mf
+        app.kubernetes.io/manifest-managed-by: kontinuous
+        app.kubernetes.io/manifest-created-by: kontinuous
+      annotations:
+        kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+    spec:
+      containers:
+        - image: redis:6.2.5-alpine3.14
+          name: redis
+          ports:
+            - containerPort: 6379
+              name: http
+          livenessProbe:
+            failureThreshold: 6
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+            exec:
+              command:
+                - sh
+                - '-c'
+                - redis-cli ping
+          readinessProbe:
+            failureThreshold: 15
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+            exec:
+              command:
+                - sh
+                - '-c'
+                - redis-cli ping
+          startupProbe:
+            failureThreshold: 12
+            periodSeconds: 5
+            exec:
+              command:
+                - sh
+                - '-c'
+                - redis-cli ping
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+            requests:
+              cpu: 300m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: app
+    application: cdtn-api
+    kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+    kontinuous/deployment.env: cdtn-api-master
+    kontinuous/ref: master
+    kontinuous/gitSha: '0000000000000000000000000000000000000000'
+    kontinuous/appVersion: '0000000000000000000000000000000000000000'
+    kontinuous/resourceName: service-app-46z2o1vv
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: cdtn-api-master
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/service.yaml
+    kontinuous/plugin.needs: '["redis"]'
+    kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    component: app
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: redis
+    application: cdtn-api
+    kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+    kontinuous/deployment.env: cdtn-api-master
+    kontinuous/ref: master
+    kontinuous/gitSha: '0000000000000000000000000000000000000000'
+    kontinuous/appVersion: '0000000000000000000000000000000000000000'
+    kontinuous/resourceName: service-redis-21v4gntm
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: redis
+  namespace: cdtn-api-master
+  annotations:
+    kontinuous/chartPath: project.fabrique.contrib.redis
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/redis/templates/service.yaml
+    kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 6379
+  selector:
+    component: redis
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kontinuous/chartPath: project.fabrique.contrib.app
+    kontinuous/source: project/charts/fabrique/charts/contrib/charts/app/templates/ingress.yaml
+    kontinuous/plugin.needs: '["redis"]'
+    kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+  labels:
+    component: app
+    application: cdtn-api
+    kontinuous/deployment: cdtn-api-master-0000000000000000000000000000000000000000
+    kontinuous/deployment.env: cdtn-api-master
+    kontinuous/ref: master
+    kontinuous/gitSha: '0000000000000000000000000000000000000000'
+    kontinuous/appVersion: '0000000000000000000000000000000000000000'
+    kontinuous/resourceName: ingress-app-b4kcj2bx
+    app.kubernetes.io/manifest-managed-by: kontinuous
+    app.kubernetes.io/manifest-created-by: kontinuous
+  name: app
+  namespace: cdtn-api-master
+spec:
+  rules:
+    - host: cdtn-api-master.dev.fabrique.social.gouv.fr
+      http:
+        paths:
+          - backend:
+              service:
+                name: app
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - cdtn-api-master.dev.fabrique.social.gouv.fr
+      secretName: wildcard-crt
