@@ -29,10 +29,5 @@ jobs:
           value: redis://redis:80
         - name: NODE_OPTIONS
           value: --max-old-space-size=3072
-      resources:
-        limits:
-          cpu: 1
-          memory: 4Gi
-        requests:
-          cpu: 300m
-          memory: 1Gi
+      cpuLimit: 1
+      memoryLimit: 4Gi
