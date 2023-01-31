@@ -19,7 +19,7 @@ redis:
 jobs:
   runs:
     cache-update:
-      image: "{{ .Values.global.registry }}{{ .Values.global.imageProject }}{{ .Values.global.imageRepository }}/app:{{ .Values.global.imageTag }}"
+      image: "{{ .Values.global.registry }}/{{ .Values.global.imageProject }}/{{ .Values.global.imageRepository }}/app:{{ .Values.global.imageTag }}"
       ~needs: [redis, app]
       run: |
         yarn cache:update
