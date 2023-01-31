@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/SocialGouv/cdtn-api/compare/v1.10.1...v1.11.0) (2023-01-31)
+
+
+### Features
+
+* **ci:** migration kontinuous + rootless redis ([#116](https://github.com/SocialGouv/cdtn-api/issues/116)) ([3bae142](https://github.com/SocialGouv/cdtn-api/commit/3bae142f69c4ab5784b642de15f182edc1f88b79))
+
 ## [1.10.1](https://github.com/SocialGouv/cdtn-api/compare/v1.10.0...v1.10.1) (2022-10-20)
 
 
