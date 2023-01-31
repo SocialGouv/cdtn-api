@@ -21,5 +21,6 @@ jobs:
     cache-update:
       image: "{{ .Values.global.registry }}/{{ .Values.global.imageProject }}/{{ .Values.global.imageRepository }}/app:{{ .Values.global.imageTag }}"
       ~needs: [redis, app]
+      shell: sh
       run: |
         yarn cache:update
