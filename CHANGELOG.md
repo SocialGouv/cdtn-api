@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/SocialGouv/cdtn-api/compare/v1.11.0...v1.11.1) (2023-03-01)
+
+
+### Bug Fixes
+
+* **deps:** update [@socialgouv](https://github.com/socialgouv) data packages (minor) ([#117](https://github.com/SocialGouv/cdtn-api/issues/117)) ([2449934](https://github.com/SocialGouv/cdtn-api/commit/2449934ebcf29073245e312a6f25cab9f2688da0))
+
 # [1.11.0](https://github.com/SocialGouv/cdtn-api/compare/v1.10.1...v1.11.0) (2023-01-31)
 
 
