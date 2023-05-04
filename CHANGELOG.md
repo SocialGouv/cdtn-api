@@ -1,3 +1,10 @@
+## [1.11.2](https://github.com/SocialGouv/cdtn-api/compare/v1.11.1...v1.11.2) (2023-05-04)
+
+
+### Bug Fixes
+
+* memory request ([71b386f](https://github.com/SocialGouv/cdtn-api/commit/71b386fb2b560d19191cb6fe2b435b2d49089eb9))
+
 ## [1.11.1](https://github.com/SocialGouv/cdtn-api/compare/v1.11.0...v1.11.1) (2023-03-01)
 
 
