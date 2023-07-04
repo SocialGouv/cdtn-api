@@ -1,3 +1,10 @@
+## [1.11.3](https://github.com/SocialGouv/cdtn-api/compare/v1.11.2...v1.11.3) (2023-07-04)
+
+
+### Bug Fixes
+
+* documentation ([3c87766](https://github.com/SocialGouv/cdtn-api/commit/3c87766e206fa2f60b1e24663b143be3c4ecf180))
+
 ## [1.11.2](https://github.com/SocialGouv/cdtn-api/compare/v1.11.1...v1.11.2) (2023-05-04)
 
 
