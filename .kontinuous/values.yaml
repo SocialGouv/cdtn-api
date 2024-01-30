@@ -14,7 +14,7 @@ app:
       memory: 1Gi
 
 redis:
-  image: redis:6.2.5-alpine3.14
+  image: redis:6.2.6-alpine3.14
 
 jobs:
   runs:
